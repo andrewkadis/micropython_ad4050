@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<examples>
+  <example schema-version="1.2">
+    <name>HelloWorld</name>
+    <description>Hello world example for ADuCM4050 EZ-Kit</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>HelloWorld</keywords>
+    <projects>
+      <project mainfile="./src/HelloWorld.c" path="Boards/ADuCM4050-EZ-KIT/Examples/hello_world/ADuCM4x50/cces" readme="./Readme_HelloWorld.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/HelloWorld" type="Debug"/>
+            <config binary="./Release/HelloWorld" type="Release"/>
+          </configs>
+          <result pass="Hello, World!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/hello_world/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/hello_world/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/hello_world"/>
+    </copy-actions>
+  </example>
+</examples>

@@ -1,0 +1,1004 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<examples>
+  <example schema-version="1.2">
+    <name>ADC_channel_read</name>
+    <description>ADC_channel_read</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>ADC, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/adc_channel_read.c" path="Boards/ADuCM4050-EZ-KIT/Examples/adc/adc_channel_read/ADuCM4x50/cces" readme="./Readme_adc_channel_read.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/adc_channel_read" type="Debug"/>
+            <config binary="./Release/adc_channel_read" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/adc/adc_channel_read/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/adc/adc_channel_read/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/adc/adc_channel_read"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>adxl363_accel_lfcsp</name>
+    <description>ADXL363 accel Example for LFCSP board</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>ADXL363, SPI, aducm4050</keywords>
+    <projects>
+      <project mainfile="../../adxl363_accel.c" path="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel/ADuCM4x50_LFCSP/cces" readme="../Readme_adxl363_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/accelerometer" type="Debug"/>
+            <config binary="./Release/accelerometer" type="Release"/>
+          </configs>
+          <result pass=""/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel/ADuCM4x50_LFCSP/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel/ADuCM4x50_LFCSP"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>adxl363_accel_wlcsp</name>
+    <description>ADXL363 accel Example for WLCSP board</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>ADXL363, SPI, aducm4050</keywords>
+    <projects>
+      <project mainfile="../../adxl363_accel.c" path="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel/ADuCM4x50_WLCSP/cces" readme="../Readme_adxl363_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/accelerometer" type="Debug"/>
+            <config binary="./Release/accelerometer" type="Release"/>
+          </configs>
+          <result pass=""/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50_WLCSP/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel/ADuCM4x50_WLCSP/cces"/>
+      <copy dst="ADuCM4x50_WLCSP" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel/ADuCM4x50_WLCSP"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>accel_fifo_lfcsp</name>
+    <description>ADXL363 USING FIFO Example for LFCSP board</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>ADXL363, FIFO, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/accel_fifo.c" path="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO/ADuCM4x50_LFCSP/cces" readme="./Readme_adxl363_fifo_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/accel_fifo" type="Debug"/>
+            <config binary="./Release/accel_fifo" type="Release"/>
+          </configs>
+          <result pass=""/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50_LFCSP/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO/ADuCM4x50_LFCSP/cces"/>
+      <copy dst="ADuCM4x50_LFCSP" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO/ADuCM4x50_LFCSP"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>accel_fifo_wlcsp</name>
+    <description>ADXL363 USING FIFO Example for WLCSP board</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>ADXL363, FIFO, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/accel_fifo.c" path="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO/ADuCM4x50_WLCSP/cces" readme="./Readme_adxl363_fifo_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/accel_fifo" type="Debug"/>
+            <config binary="./Release/accel_fifo" type="Release"/>
+          </configs>
+          <result pass=""/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50_MLCSP/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO/ADuCM4x50_WLCSP/cces"/>
+      <copy dst="ADuCM4x50_MLCSP" src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO/ADuCM4x50_WLCSP"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/adxl363/accel_using_FIFO"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>beeper_example</name>
+    <description>Beeper Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>BEEP,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/beep_example.c" path="Boards/ADuCM4050-EZ-KIT/Examples/beep/beeper_example/ADuCM4x50/cces" readme="./Readme_beeper_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/beeper_example" type="Debug"/>
+            <config binary="./Release/beeper_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/beep/beeper_example/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/beep/beeper_example/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/beep/beeper_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>core_driven_crc</name>
+    <description>Core Driven CRC Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>CRC, aducm4050</keywords>
+    <projects>
+      <project mainfile="./core_driven_crc.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crc/core_driven_CRC/ADuCM4x50/cces" readme="./Readme_core_driven_crc.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/core_driven_crc" type="Debug"/>
+            <config binary="./Release/core_driven_crc" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crc/core_driven_CRC/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crc/core_driven_CRC/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crc/core_driven_CRC"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>dma_driven_crc_without_callback</name>
+    <description>DMA Driven CRC without callback Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>CRC, aducm4050</keywords>
+    <projects>
+      <project mainfile="./dma_driven_crc_without_callback.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_without_callback/ADuCM4x50/cces" readme="./Readme_dma_driven_crc_without_callback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/dma_driven_crc_without_callback" type="Debug"/>
+            <config binary="./Release/dma_driven_crc_without_callback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_without_callback/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_without_callback/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_without_callback"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>dma_driven_crc_with_callback</name>
+    <description>DMA Driven CRC with callback Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>CRC, aducm4050</keywords>
+    <projects>
+      <project mainfile="./dma_driven_crc_with_callback.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_with_callback/ADuCM4x50/cces" readme="./Readme_dma_driven_crc_with_callback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/dma_driven_crc_with_callback" type="Debug"/>
+            <config binary="./Release/dma_driven_crc_with_callback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_with_callback/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_with_callback/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crc/dma_driven_CRC_with_callback"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_CBC</name>
+    <description>Crypto cbc</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_cbc.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cbc/ADuCM4x50/cces" readme="Readme_crypto_cbc.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_cbc" type="Debug"/>
+            <config binary="./Release/crypto_cbc" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cbc/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cbc/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cbc"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_ccm</name>
+    <description>Crypto ccm</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_ccm.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ccm/ADuCM4x50/cces" readme="Readme_crypto_ccm.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_ccm" type="Debug"/>
+            <config binary="./Release/crypto_ccm" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ccm/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ccm/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ccm"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_cmac</name>
+    <description>Crypto cmac</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_cmac.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cmac/ADuCM4x50/cces" readme="Readme_crypto_cmac.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_cmac" type="Debug"/>
+            <config binary="./Release/crypto_cmac" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cmac/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cmac/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_cmac"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_ctr</name>
+    <description>Crypto ctr</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_ctr.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ctr/ADuCM4x50/cces" readme="Readme_crypto_ctr.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_ctr" type="Debug"/>
+            <config binary="./Release/crypto_ctr" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ctr/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ctr/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ctr"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_ecb</name>
+    <description>Crypto ecb</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_ecb.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb/ADuCM4x50/cces" readme="Readme_crypto_ecb.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_ecb" type="Debug"/>
+            <config binary="./Release/crypto_ecb" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_ecb</name>
+    <description>Crypto ecb</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_ecb.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb_with_pkstor/ADuCM4x50/cces" readme="Readme_crypto_ecb.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_ecb" type="Debug"/>
+            <config binary="./Release/crypto_ecb" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb_with_pkstor/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb_with_pkstor/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_ecb_with_pkstor"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_hmac</name>
+    <description>Crypto hmac</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, hmac, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_hmac.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_hmac/ADuCM4x50/cces" readme="Readme_crypto_hmac.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_hmac" type="Debug"/>
+            <config binary="./Release/crypto_hmac" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_hmac/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_hmac/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_hmac"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Crypto_sha</name>
+    <description>Crypto sha</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>crypto, sha, aducm4050, aducm4x50</keywords>
+    <projects>
+      <project mainfile="./src/crypto_sha.c" path="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_sha/ADuCM4x50/cces" readme="Readme_crypto_sha.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/crypto_sha" type="Debug"/>
+            <config binary="./Release/crypto_sha" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_sha/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_sha/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/crypto/crypto_sha"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>flash_block_protect</name>
+    <description>Flash Block Protect Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>Flash, Block,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/flash_block_protect.c" path="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_block_protect/ADuCM4x50/cces" readme="./Readme_flash_block_protect.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/flash_block_protect" type="Debug"/>
+            <config binary="./Release/flash_block_protect" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_block_protect/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_block_protect/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_block_protect"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>flash_page_write</name>
+    <description>Flash Page Write Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>FLASH,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/flash_page_write.c" path="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_page_write/ADuCM4x50/cces" readme="ADuCM4x50/Readme_flash_page_write.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/flash_page_write" type="Debug"/>
+            <config binary="./Release/flash_page_write" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_page_write/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_page_write/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/flash/flash_page_write"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>FreeRTOS_SPI_Loopback</name>
+    <description>FreeRTOS_SPI_Loopback</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>FreeRTOS,SPI</keywords>
+    <projects>
+      <project mainfile="./src/spi_loopback_freertos.c" path="Boards/ADuCM4050-EZ-KIT/Examples/FreeRTOS/SPI_Loopback/ADuCM4x50/cces" readme="./src/Readme_freertos_spi_loopback.txt">
+        <sqe build="no" run="no">
+          <configs>
+            <config binary="./Debug/freertos_spi_loopback" type="Debug"/>
+            <config binary="./Release/freertos_spi_loopback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/FreeRTOS/SPI_Loopback/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/FreeRTOS/SPI_Loopback/ADuCM4x50"/>
+      <copy dst="config" src="Boards/ADuCM4050-EZ-KIT/Examples/FreeRTOS/SPI_Loopback/inc/config"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/FreeRTOS/SPI_Loopback"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>LED_button_callback</name>
+    <description>LED and Pushbutton Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>GPIO, LED, Pushbutton, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/LED_button_callback.c" path="Boards/ADuCM4050-EZ-KIT/Examples/gpio/LED_button_callback/ADuCM4x50/cces" readme="./Readme_LED_button_callback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/LED_button_callback" type="Debug"/>
+            <config binary="./Release/LED_button_callback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/gpio/LED_button_callback/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/gpio/LED_button_callback/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/gpio/LED_button_callback"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Temperature_Sensor</name>
+    <description>I2C Temperature Sensor Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>I2C, Temperature, ADT7420</keywords>
+    <projects>
+      <project mainfile="./temperature_sensor.c" path="Boards/ADuCM4050-EZ-KIT/Examples/i2c/temperature_sensor/ADuCM4x50/cces" readme="./Readme_temperature_sensor.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/temperature_sensor" type="Debug"/>
+            <config binary="./Release/temperature_sensor" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/i2c/temperature_sensor/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/i2c/temperature_sensor/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/i2c/temperature_sensor"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>POST</name>
+    <description>Application example with manufacturing tests for the EZ-KIT</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>POST</keywords>
+    <projects>
+      <project mainfile="./src/main.c" path="Boards/ADuCM4050-EZ-KIT/Examples/Power_On_Self_Test/ADuCM4x50/cces" readme="./Readme_post.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/POST" type="Debug"/>
+            <config binary="./Release/POST" type="Release"/>
+          </configs>
+          <result pass=""/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/Power_On_Self_Test/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/Power_On_Self_Test/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/Power_On_Self_Test"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>Rng_Example</name>
+    <description>Random Number Generator (RNG) Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>RNG, Random, aducm4050</keywords>
+    <projects>
+      <project mainfile="./rng_example.c" path="Boards/ADuCM4050-EZ-KIT/Examples/rng/rng_example/ADuCM4x50/cces" readme="./Readme_rng_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/rng_example" type="Debug"/>
+            <config binary="./Release/rng_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/rng/rng_example/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/rng/rng_example/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/rng/rng_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>rtc_alarm</name>
+    <description>RTC Alarm Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>RTC, Alarm, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/rtc_alarm.c" path="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_alarm/ADuCM4x50/cces" readme="./Readme_rtc_alarm.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/rtc_alarm" type="Debug"/>
+            <config binary="./Release/rtc_alarm" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_alarm/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_alarm/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_alarm"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>rtc_IO_example</name>
+    <description>RTC IO Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>RTC, IO, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/rtc_io_example.c" path="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_IO_example/ADuCM4x50/cces" readme="./Readme_rtc_IO_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/rtc_IO_example" type="Debug"/>
+            <config binary="./Release/rtc_IO_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_IO_example/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_IO_example/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/rtc/Rtc_IO_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>SPI_LoopBack_Example</name>
+    <description>LoopBack (SPI) Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SPI, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/spi_loopback.c" path="Boards/ADuCM4050-EZ-KIT/Examples/spi/LoopBack/ADuCM4x50/cces" readme="./Readme_spi_loopback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/spi_loopback" type="Debug"/>
+            <config binary="./Release/spi_loopback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/spi/LoopBack/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/spi/LoopBack/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/spi/LoopBack"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>SPI_MasterSlaveLoopback_Example</name>
+    <description>Master-Slave Loopback (SPI) Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SPI, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/SpiMasterSlaveLoopBack.c" path="Boards/ADuCM4050-EZ-KIT/Examples/spi/MasterSlaveLoopBack/ADuCM4x50/cces" readme="./Readme_MasterSlave_loopback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/MasterSlaveLoopback" type="Debug"/>
+            <config binary="./Release/MasterSlaveLoopback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/spi/MasterSlaveLoopBack/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/spi/MasterSlaveLoopBack/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/spi/MasterSlaveLoopBack"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>spi-flash</name>
+    <description>SPI Flash W25Q32 Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>ADuCM4x50 SPI-Flash SPI Winbond</keywords>
+    <projects>
+      <project mainfile="./w25q32_example.c" path="Boards/ADuCM4050-EZ-KIT/Examples/spi-flash/w25q32_example/ADuCM4x50/cces" readme="./Readme_w25q32_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/w25q32_example" type="Debug"/>
+            <config binary="./Release/w25q32_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/spi-flash/w25q32_example/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/spi-flash/w25q32_example/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/spi-flash/w25q32_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>sport_loopback_dma</name>
+    <description>DMA Driven SPORT Loopback Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SPORT, LOOPBACK, DMA, aducm4050</keywords>
+    <projects>
+      <project mainfile="./sport_loopback_dma.c" path="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_dma/ADuCM4x50/cces" readme="Readme_sport_loopback_dma.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/sport_loopback_dma" type="Debug"/>
+            <config binary="./Release/sport_loopback_dma" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_dma/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_dma/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_dma"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>sport_loopback_int</name>
+    <description>Interrupt Driven SPORT Loopback Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SPORT, LOOPBACK, PIO, aducm4050</keywords>
+    <projects>
+      <project mainfile="./sport_loopback_int.c" path="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_int/ADuCM4x50/cces" readme="Readme_sport_loopback_int.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/sport_loopback_int" type="Debug"/>
+            <config binary="./Release/sport_loopback_int" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_int/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_int/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/sport/loopback_int"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>systick_example</name>
+    <description>Example to demonstrate SysTick timer to generate specific number of interrupts</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SysTick, Timer, Interrupt, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/systick_example.c" path="Boards/ADuCM4050-EZ-KIT/Examples/SysTick/systick_example/ADuCM4x50/cces" readme="Readme_systick_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/systick_example" type="Debug"/>
+            <config binary="./Release/systick_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/SysTick/systick_example/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/SysTick/systick_example/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/SysTick/systick_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>tmr_example_gp</name>
+    <description>GENERAL PURPOSE TIMER (TMR) Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>TMR, timer, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/tmr_example_gp.c" path="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_gp/ADuCM4x50/cces" readme="Readme_tmr_example_gp.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/tmr_example_gp" type="Debug"/>
+            <config binary="./Release/tmr_example_gp" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_gp/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_gp/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_gp"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>tmr_example_rgb</name>
+    <description>RGB TIMER (TMR) Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>TMR, RGB, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/tmr_example_rgb.c" path="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_rgb/ADuCM4x50/cces" readme="Readme_tmr_example_rgb.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/tmr_example_rgb" type="Debug"/>
+            <config binary="./Release/tmr_example_rgb" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_rgb/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_rgb/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/tmr/tmr_example_rgb"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>UART_Autobaud_Example</name>
+    <description>UART autobaud Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>UART,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/autobaud.c" path="Boards/ADuCM4050-EZ-KIT/Examples/uart/Autobaud/ADuCM4x50/cces" readme="Readme_autobaud.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/Autobaud" type="Debug"/>
+            <config binary="./Release/Autobaud" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Autobaud/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Autobaud/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Autobaud"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>UART_Callback_Example</name>
+    <description>UART used in callback mode Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>UART,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/uart_callback.c" path="Boards/ADuCM4050-EZ-KIT/Examples/uart/Callback/ADuCM4x50/cces" readme="Readme_uart_callback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/uart_callback" type="Debug"/>
+            <config binary="./Release/uart_callback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Callback/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Callback/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Callback"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>UART_Loopback_Example</name>
+    <description>UART used in loopback mode Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>UART,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/uart_loop_back.c" path="Boards/ADuCM4050-EZ-KIT/Examples/uart/Loopback/ADuCM4x50/cces" readme="Readme_uart_loopback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/uart_loopback" type="Debug"/>
+            <config binary="./Release/uart_loopback" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Loopback/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Loopback/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/uart/Loopback"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>wdt_example_interrupt</name>
+    <description>WDT Example Interrupt</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>WDT,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/wdt_example_interrupt.c" path="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_interrupt/ADuCM4x50/cces" readme="Readme_wdt_example_interrupt.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/wdt_example_interrupt" type="Debug"/>
+            <config binary="./Release/wdt_example_interrupt" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_interrupt/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_interrupt/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_interrupt"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>wdt_example_reset</name>
+    <description>WDT Example Reset</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>WDT,aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/wdt_example_reset.c" path="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_reset/ADuCM4x50/cces" readme="Readme_wdt_example_reset.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/wdt_example_reset" type="Debug"/>
+            <config binary="./Release/wdt_example_reset" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_reset/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_reset/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/wdt/wdt_example_reset"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>wakeup_button</name>
+    <description>External Interrupt (XINT) Wakeup Button Example</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>XINT, Interrupt, aducm4050</keywords>
+    <projects>
+      <project mainfile="./src/wakeup_button.c" path="Boards/ADuCM4050-EZ-KIT/Examples/xint/wakeup_button/ADuCM4x50/cces" readme="Readme_wakeup_button.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/wakeup_button" type="Debug"/>
+            <config binary="./Release/wakeup_button" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="ADuCM4x50/cces" src="Boards/ADuCM4050-EZ-KIT/Examples/xint/wakeup_button/ADuCM4x50/cces"/>
+      <copy dst="ADuCM4x50" src="Boards/ADuCM4050-EZ-KIT/Examples/xint/wakeup_button/ADuCM4x50"/>
+      <copy dst="." src="Boards/ADuCM4050-EZ-KIT/Examples/xint/wakeup_button"/>
+    </copy-actions>
+  </example>
+</examples>

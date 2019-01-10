@@ -1,0 +1,297 @@
+<!-- ********************************************************************** -->
+<!-- ******  ADuCM4050BCBZ-pinmux.xml                                       -->
+<!-- ********************************************************************** -->
+<!--                                                                        -->
+<!-- Date         :   2017-02-14                                            -->
+<!--                                                                        -->
+<!-- Copyright (c) 2016-2017 Analog Devices, Inc.  All Rights Reserved.     -->
+<!-- This software is proprietary and confidential to Analog Devices, Inc.  -->
+<!-- and its licensors.                                                     -->
+<!--                                                                        -->
+<!-- ********************************************************************** -->
+
+<pinmux-xml schema-version="1" name="ADuCM4050BCBZ-pinmux.xml"> 
+
+<peripheral name="SPI0" description="SPI0 Module" >
+<signal name="CLK"    port="P0" bit="0" mux="1" pin="0" description="Serial Clock" />
+<signal name="MOSI"   port="P0" bit="2" mux="1" pin="1" description="MOSI" />
+<signal name="MISO"   port="P0" bit="4" mux="1" pin="2" description="MISO" />
+<signal name="CS_0"   port="P0" bit="6" mux="1" pin="3" description="Chip Select-0" />
+<signal name="CS_1"   port="P1" bit="20" mux="1" pin="10" description="Chip Select-1" />
+<signal name="CS_1"   port="P2" bit="30" mux="3" pin="15" description="Chip Select-1" />
+<signal name="CS_2"   port="P2" bit="16" mux="2" pin="8" description="Chip Select-2" />
+<signal name="CS_2"   port="P2" bit="26" mux="2" pin="13" description="Chip Select-2" />
+<signal name="CS_3"   port="P2" bit="18" mux="2" pin="9" description="Chip Select-3" />
+<signal name="CS_3"   port="P2" bit="28" mux="1" pin="14" description="Chip Select-3" />
+<signal name="RDY"    port="P1" bit="28" mux="2" pin="14" description="SPI0 RDY Signal" />
+</peripheral>
+
+<peripheral name="SPI1" description="SPI1 Module" >
+<signal name="CLK"   port="P1" bit="12" mux="1" pin="6" description="Serial Clock" />
+<signal name="MOSI"  port="P1" bit="14" mux="1" pin="7" description="MOSI" />
+<signal name="MISO"  port="P1" bit="16" mux="1" pin="8" description="MISO" />
+<signal name="CS_0"  port="P1" bit="18" mux="1" pin="9" description="Chip Select-0" />
+<signal name="CS_1"  port="P2" bit="22" mux="1" pin="11" description="Chip Select-1" />
+<signal name="CS_2"  port="P2" bit="4"  mux="2" pin="2" description="Chip Select-2" />
+<signal name="CS_3"  port="P1" bit="20" mux="3" pin="10" description="Chip Select-3" />
+<signal name="CS_3"  port="P2" bit="30" mux="2" pin="15" description="Chip Select-3" />
+<signal name="RDY"   port="P0" bit="28" mux="2" pin="14" description="SPI1 RDY Signal" />
+</peripheral>
+
+<peripheral name="SPI2" description="SPI2 Module" >
+<signal name="CLK"   port="P1" bit="4" mux="1" pin="2" description="Serial Clock" />
+<signal name="MOSI"  port="P1" bit="6" mux="1" pin="3" description="MOSI" />
+<signal name="MISO"  port="P1" bit="8" mux="1" pin="4" description="MISO" />
+<signal name="CS_0"  port="P1" bit="10" mux="1" pin="5" description="Chip Select-0" />
+<signal name="CS_1"  port="P0" bit="18" mux="2" pin="9" description="Chip Select-1" />
+<signal name="CS_2"  port="P2" bit="30"  mux="1" pin="15" description="Chip Select-2" />
+<signal name="CS_3"  port="P2" bit="14" mux="2" pin="7" description="Chip Select-3" />
+<signal name="CS_3"  port="P2" bit="24" mux="2" pin="12" description="Chip Select-3" />
+<signal name="RDY"   port="P0" bit="6" mux="3" pin="3" description="SPI2 RDY Signal" />
+</peripheral>
+
+<peripheral name="I2C0" description="I2C0 Module" >
+<signal name="SCL" port="P0" bit="8"  mux="1" pin="4" description="Serial Clock" />
+<signal name="SDA" port="P0" bit="10" mux="1" pin="5" description="Serial Data" />
+</peripheral>
+
+<peripheral name="GPIO" description="Port0 and Port1 GPIO" >
+<signal name="P0_6" port="P0" bit="12" mux="1" pin="6" description="GPIO 6" />
+<signal name="P0_7" port="P0" bit="14" mux="1" pin="7" description="GPIO 7" />
+<signal name="P1_1" port="P1" bit="2" mux="1" pin="1" description="GPIO 17" />
+</peripheral>
+
+<peripheral name="BEEPER0" description="Beeper0 Module" >
+<signal name="TONE_N" port="P0" bit="16"  mux="1" pin="8" description="Tone N" />
+<signal name="TONE_P" port="P0" bit="18"  mux="1" pin="9" description="Tone P" />
+</peripheral>
+
+<peripheral name="UART0" description="UART0 Module" >
+<signal name="Tx" port="P0" bit="20" mux="1" pin="10" description="UART0 Tx Data Line" />
+<signal name="Rx" port="P0" bit="22" mux="1" pin="11" description="UART0 Rx Data Line" />
+<signal name="SOUT_EN" port="P0" bit="24" mux="3" pin="12" description="UART0_SOUT_EN" />
+</peripheral>
+
+<peripheral name="UART1" description="UART1 Module" >
+<signal name="Tx" port="P1" bit="30" mux="2" pin="15" description="UART1 Tx Data Line" />
+<signal name="Tx" port="P2" bit="24" mux="1" pin="12" description="UART1 Tx Data Line" />
+<signal name="Rx" port="P2" bit="0" mux="2" pin="0" description="UART1 Rx Data Line" />
+<signal name="Rx" port="P2" bit="26" mux="1" pin="13" description="UART1 Rx Data Line" />
+</peripheral>
+
+<peripheral name="SPORT0_A" description="SPORT0_A Module" >
+<signal name="SPT0A_D0"    port="P0" bit="24" mux="1" pin="12" description="SPORT0_A Data" />
+<signal name="SPT0A_D0"    port="P3" bit="4" mux="2" pin="2" description="SPORT0_A Data" />
+<signal name="SPT0A_CLK"   port="P1" bit="30" mux="1" pin="15" description="SPORT0_A CLK" />
+<signal name="SPT0A_CLK"   port="P3" bit="0" mux="2" pin="0" description="SPORT0_A CLK" />
+<signal name="SPT0A_FS"    port="P2" bit="0"  mux="1" pin="0" description="SPORT0_A FS" />
+<signal name="SPT0A_FS"    port="P3" bit="2"  mux="2" pin="1" description="SPORT0_A FS" />
+<signal name="SPT0A_CNV"   port="P2" bit="4"  mux="1" pin="2" description="SPORT0_A CNV" />
+<signal name="SPT0A_CNV"   port="P3" bit="6"  mux="2" pin="3" description="SPORT0_A CNV" />
+</peripheral>
+
+<peripheral name="SPORT0_B" description="SPORT0_B Module" >
+<signal name="SPT0B_D0"    port="P0" bit="4" mux="2" pin="2" description="SPORT0_B Data" />
+<signal name="SPT0B_CLK"   port="P0" bit="0" mux="2" pin="0" description="SPORT0_B CLK" />
+<signal name="SPT0B_FS"    port="P0" bit="2" mux="2" pin="1" description="SPORT0_B FS" />
+<signal name="SPT0B_CNV"   port="P0" bit="6" mux="2" pin="3" description="SPORT0_B CNV" />
+</peripheral>
+
+<peripheral name="SYS_WAKEUP" description="System Wake Up Signals" >
+<signal name="sys_wake0" port="P0" bit="30" mux="1" pin="15" description="System Wake Up 0 Signal Line" />
+<signal name="sys_wake1" port="P1" bit="0" mux="1" pin="0" description="System Wake Up 1 Signal Line" />
+<signal name="sys_wake2" port="P0" bit="26" mux="1" pin="13" description="System Wake Up 2 Signal Line" />
+<signal name="sys_wake3" port="P2" bit="2" mux="1" pin="1" description="System Wake Up 3 Signal Line" />
+</peripheral>
+
+<peripheral name="JTAG" description="JTAG TAP Controller" >
+<signal name="TDI" port="P1" bit="22" mux="1" pin="11" description="Test Data In" />
+<signal name="TDO" port="P1" bit="24" mux="1" pin="12" description="Test Data Out" />
+<signal name="TCK" port="P1" bit="26" mux="2" pin="13" description="Test Clock" />
+<signal name="TMS" port="P1" bit="28" mux="1" pin="14" description="Test Mode Select" />
+<signal name="TRST" port="P1" bit="30" mux="3" pin="15" description="Test Reset" />
+</peripheral>
+
+<peripheral name="RGB_TMR0" description="Timer RGB" >
+<signal name="RGB_TMR0_1" port="P1" bit="12" mux="3" pin="6" description="Timer RGB PWM0" />
+<signal name="RGB_TMR0_1" port="P3" bit="0" mux="1" pin="0" description="Timer RGB PWM0" />
+<signal name="RGB_TMR0_2" port="P1" bit="14" mux="3" pin="7" description="Timer RGB PWM1" />
+<signal name="RGB_TMR0_2" port="P3" bit="2" mux="1" pin="1" description="Timer RGB PWM1" />
+<signal name="RGB_TMR0_3" port="P1" bit="16" mux="3" pin="8" description="Timer RGB PWM2" />
+<signal name="RGB_TMR0_3" port="P3" bit="4" mux="1" pin="2" description="Timer RGB PWM2" />
+</peripheral>
+
+<peripheral name="RTC" description="RTC1 SensorStrobe" >
+<signal name="RTC_SS1" port="P2" bit="22" mux="3" pin="11" description="RTC1 SensorStrobe 1" />
+<signal name="RTC_SS2" port="P1" bit="24"  mux="2" pin="12"  description="RTC1 SensorStrobe 2" />
+<signal name="RTC_SS3" port="P2" bit="16" mux="3" pin="8" description="RTC1 SensorStrobe 3" />
+<signal name="RTC_SS4" port="P3" bit="6" mux="1" pin="3" description="RTC1 SensorStrobe 4" />
+</peripheral>
+
+<peripheral name="TIMER0" description="General-Purpose Timer Block">
+<signal name="TMR0_OUT" port="P0" bit="28" mux="1" pin="14" description="Timer 0" />
+<signal name="TMR1_OUT" port="P1" bit="22" mux="2" pin="11" description="Timer 1" />
+<signal name="TMR2_OUT" port="P1" bit="26"  mux="1" pin="13"  description="Timer 2" />
+<signal name="TMR2_OUT" port="P2" bit="2"  mux="2" pin="1"  description="Timer 2" />
+</peripheral>
+
+<peripheral name="SWD0" description="Serial Wire Debug" >
+<signal name="SWD0_CLK" port="P0" bit="12" mux="0" pin="6" description="JTAG or SWD Clock" />
+<signal name="SWD0_Data" port="P0" bit="14" mux="0" pin="7" description="JTAG Test Mode Select/Serial Wire Data" />
+</peripheral>
+
+<peripheral name="SWV" description="Serial Wire Viewer" >
+<signal name="SWV" port="P1" bit="18" mux="3" pin="9" description="Serial Wire Viewer" />
+</peripheral>
+
+<peripheral name="ADC0_IN" description="ADC0 Module" >
+<signal name="ADC0_VIN0" port="P2" bit="6" mux="1" pin="3" description="ADC0_INPUT-0" />
+<signal name="ADC0_VIN1" port="P2" bit="8" mux="1" pin="4" description="ADC0_INPUT-1" />
+<signal name="ADC0_VIN2" port="P2" bit="10" mux="1" pin="5" description="ADC0_INPUT-2" />
+<signal name="ADC0_VIN3" port="P2" bit="12" mux="1" pin="6" description="ADC0_INPUT-3" />
+<signal name="ADC0_VIN4" port="P2" bit="14" mux="1" pin="7" description="ADC0_INPUT-4" />
+<signal name="ADC0_VIN5" port="P2" bit="16" mux="1" pin="8" description="ADC0_INPUT-5" />
+<signal name="ADC0_VIN6" port="P2" bit="18" mux="1" pin="9" description="ADC0-INPUT-6" />
+</peripheral>
+
+<peripheral name="SYS_CLK" description="System Clock" >
+<signal name="OUT"    port="P2" bit="22"  mux="2" pin="11"  description="System Clock Out" />
+<signal name="IN"     port="P1" bit="20"  mux="2" pin="10"  description="System Clock In" />
+</peripheral>
+
+<peripheral name="SYS_BMODE" description="System Boot Mode" >
+<signal name="SYS_BMODE0"    port="P1" bit="2"  mux="0" pin="1"  description="System Boot Mode" />
+</peripheral>
+
+<!-- GPIO BLOCKS -->
+<gpio name="P0" port="P0" >
+<signal name="P0_00" pin="0" bit="0" description="Position 0" />
+<signal name="P0_01" pin="1" bit="2" description="Position 1" />
+<signal name="P0_02" pin="2" bit="4" description="Position 2" />
+<signal name="P0_03" pin="3" bit="6" description="Position 3" />
+<signal name="P0_04" pin="4" bit="8" description="Position 4" />
+<signal name="P0_05" pin="5" bit="10" description="Position 5" />
+<signal name="P0_06" pin="6" bit="12" description="Position 6" />
+<signal name="P0_07" pin="7" bit="14" description="Position 7" />
+<signal name="P0_08" pin="8" bit="16" description="Position 8" />
+<signal name="P0_09" pin="9" bit="18" description="Position 9" />
+<signal name="P0_10" pin="10" bit="20" description="Position 10" />
+<signal name="P0_11" pin="11" bit="22" description="Position 11" />
+<signal name="P0_12" pin="12" bit="24" description="Position 12" />
+<signal name="P0_13" pin="13" bit="26" description="Position 13" />
+<signal name="P0_14" pin="14" bit="28" description="Position 14" />
+<signal name="P0_15" pin="15" bit="30" description="Position 15" />
+</gpio>
+
+<gpio name="P1" port="P1" >
+<signal name="P1_00" pin="0" bit="0" description="Position 0" />
+<signal name="P1_01" pin="1" bit="2" description="Position 1" />
+<signal name="P1_02" pin="2" bit="4" description="Position 2" />
+<signal name="P1_03" pin="3" bit="6" description="Position 3" />
+<signal name="P1_04" pin="4" bit="8" description="Position 4" />
+<signal name="P1_05" pin="5" bit="10" description="Position 5" />
+<signal name="P1_06" pin="6" bit="12" description="Position 6" />
+<signal name="P1_07" pin="7" bit="14" description="Position 7" />
+<signal name="P1_08" pin="8" bit="16" description="Position 8" />
+<signal name="P1_09" pin="9" bit="18" description="Position 9" />
+<signal name="P1_10" pin="10" bit="20" description="Position 10" />
+<signal name="P1_11" pin="11" bit="22" description="Position 11" />
+<signal name="P1_12" pin="12" bit="24" description="Position 12" />
+<signal name="P1_13" pin="13" bit="26" description="Position 13" />
+<signal name="P1_14" pin="14" bit="28" description="Position 14" />
+<signal name="P1_15" pin="15" bit="30" description="Position 15" />
+</gpio>
+
+<gpio name="P2" port="P2" >
+<signal name="P2_00" pin="0" bit="0" description="Position 0" />
+<signal name="P2_01" pin="1" bit="2" description="Position 1" />
+<signal name="P2_02" pin="2" bit="4" description="Position 2" />
+<signal name="P2_03" pin="3" bit="6" description="Position 3" />
+<signal name="P2_04" pin="4" bit="8" description="Position 4" />
+<signal name="P2_05" pin="5" bit="10" description="Position 5" />
+<signal name="P2_06" pin="6" bit="12" description="Position 6" />
+<signal name="P2_07" pin="7" bit="14" description="Position 7" />
+<signal name="P2_08" pin="8" bit="16" description="Position 8" />
+<signal name="P2_09" pin="9" bit="18" description="Position 9" />
+<signal name="P2_10" pin="10" bit="20" description="Position 10" />
+<signal name="P2_11" pin="11" bit="22" description="Position 11" />
+<signal name="P2_12" pin="12" bit="24" description="Position 12" />
+<signal name="P2_13" pin="13" bit="26" description="Position 13" />
+<signal name="P2_14" pin="14" bit="28" description="Position 14" />
+<signal name="P2_15" pin="15" bit="30" description="Position 15" />
+</gpio>
+
+<gpio name="P3" port="P3" >
+<signal name="P3_00" pin="0" bit="0" description="Position 0" />
+<signal name="P3_01" pin="1" bit="2" description="Position 1" />
+<signal name="P3_02" pin="2" bit="4" description="Position 2" />
+<signal name="P3_03" pin="3" bit="6" description="Position 3" />
+</gpio>
+
+
+  <register name="pREG_GPIO0_CFG" type="mux" port="P0">  
+    <control startbit="0"   endbit="1"   startpin="0"   endpin="0"  />
+    <control startbit="2"   endbit="3"   startpin="1"   endpin="1"  />
+    <control startbit="4"   endbit="5"   startpin="2"   endpin="2"  />
+    <control startbit="6"   endbit="7"   startpin="3"   endpin="3"  />
+    <control startbit="8"   endbit="9"   startpin="4"   endpin="4"  />
+    <control startbit="10"  endbit="11"  startpin="5"   endpin="5"  />
+    <control startbit="12"  endbit="13"  startpin="6"   endpin="6"  />
+    <control startbit="14"  endbit="15"  startpin="7"   endpin="7"  />
+    <control startbit="16"  endbit="17"  startpin="8"   endpin="8"  />
+    <control startbit="18"  endbit="19"  startpin="9"   endpin="9"  />
+    <control startbit="20"  endbit="21"  startpin="10"  endpin="10" />
+    <control startbit="22"  endbit="23"  startpin="11"  endpin="11" />
+    <control startbit="24"  endbit="25"  startpin="12"  endpin="12" />
+    <control startbit="26"  endbit="27"  startpin="13"  endpin="13" />
+    <control startbit="28"  endbit="29"  startpin="14"  endpin="14" />
+    <control startbit="30"  endbit="31"  startpin="15"  endpin="15" />
+  </register>
+
+  <register name="pREG_GPIO1_CFG" type="mux" port="P1">  
+    <control startbit="0"   endbit="1"   startpin="0"   endpin="0"  />
+    <control startbit="2"   endbit="3"   startpin="1"   endpin="1"  />
+    <control startbit="4"   endbit="5"   startpin="2"   endpin="2"  />
+    <control startbit="6"   endbit="7"   startpin="3"   endpin="3"  />
+    <control startbit="8"   endbit="9"   startpin="4"   endpin="4"  />
+    <control startbit="10"  endbit="11"  startpin="5"   endpin="5"  />
+    <control startbit="12"  endbit="13"  startpin="6"   endpin="6"  />
+    <control startbit="14"  endbit="15"  startpin="7"   endpin="7"  />
+    <control startbit="16"  endbit="17"  startpin="8"   endpin="8"  />
+    <control startbit="18"  endbit="19"  startpin="9"   endpin="9"  />
+    <control startbit="20"  endbit="21"  startpin="10"  endpin="10" />
+    <control startbit="22"  endbit="23"  startpin="11"  endpin="11" />
+    <control startbit="24"  endbit="25"  startpin="12"  endpin="12" />
+    <control startbit="26"  endbit="27"  startpin="13"  endpin="13" />
+    <control startbit="28"  endbit="29"  startpin="14"  endpin="14" />
+    <control startbit="30"  endbit="31"  startpin="15"  endpin="15" />
+  </register>
+
+  <register name="pREG_GPIO2_CFG" type="mux" port="P2">  
+    <control startbit="0"   endbit="1"   startpin="0"   endpin="0"  />
+    <control startbit="2"   endbit="3"   startpin="1"   endpin="1"  />
+    <control startbit="4"   endbit="5"   startpin="2"   endpin="2"  />
+    <control startbit="6"   endbit="7"   startpin="3"   endpin="3"  />
+    <control startbit="8"   endbit="9"   startpin="4"   endpin="4"  />
+    <control startbit="10"  endbit="11"  startpin="5"   endpin="5"  />
+    <control startbit="12"  endbit="13"  startpin="6"   endpin="6"  />
+    <control startbit="14"  endbit="15"  startpin="7"   endpin="7"  />
+    <control startbit="16"  endbit="17"  startpin="8"   endpin="8"  />
+    <control startbit="18"  endbit="19"  startpin="9"   endpin="9"  />
+    <control startbit="20"  endbit="21"  startpin="10"  endpin="10" />
+    <control startbit="22"  endbit="23"  startpin="11"  endpin="11" />
+    <control startbit="24"  endbit="25"  startpin="12"  endpin="12" />
+    <control startbit="26"  endbit="27"  startpin="13"  endpin="13" />
+    <control startbit="28"  endbit="29"  startpin="14"  endpin="14" />
+    <control startbit="30"  endbit="31"  startpin="15"  endpin="15" />
+  </register>
+
+
+  <register name="pREG_GPIO3_CFG" type="mux" port="P3">  
+    <control startbit="0"   endbit="1"   startpin="0"   endpin="0"  />
+    <control startbit="2"   endbit="3"   startpin="1"   endpin="1"  />
+    <control startbit="4"   endbit="5"   startpin="2"   endpin="2"  />
+    <control startbit="6"   endbit="7"   startpin="3"   endpin="3"  />
+  </register>
+
+</pinmux-xml>

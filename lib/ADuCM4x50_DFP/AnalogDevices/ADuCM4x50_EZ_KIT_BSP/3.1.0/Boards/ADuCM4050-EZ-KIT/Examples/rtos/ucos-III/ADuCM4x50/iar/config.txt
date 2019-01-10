@@ -1,0 +1,40 @@
+CATEGORY = BSP,RTOS,UCOS3
+
+PROCESSOR = ADuCM4050
+
+#delete any previous build files
+<CMD, del /Q/S "$testdir\Debug">
+<CMD, del /Q/S "$testdir\Release">
+
+
+###### Release Config ######
+
+#build the test project
+<CMD, %IAR_EW_HOME%\\common\\bin\\iarbuild rtos_ucos_iii_example.ewp -build Release>$output/release_build.log>
+
+#confirm build succeeded
+<ASSERT_FINDINFILE, $output\release_build.log, Total number of errors: 0, Total number of warnings: 0>
+<ASSERT_FILEEXISTS, $testdir\Release\Exe\rtos_ucos_iii_example.out>
+
+
+###### Debug Config ######
+
+#build the test project
+<CMD, %IAR_EW_HOME%\\common\\bin\\iarbuild rtos_ucos_iii_example.ewp -build Debug>$output/debug_build.log>
+
+#confirm build succeeded
+<ASSERT_FINDINFILE, $output\debug_build.log, Total number of errors: 0, Total number of warnings: 0>
+<ASSERT_FILEEXISTS, $testdir\Debug\Exe\rtos_ucos_iii_example.out>
+
+###### Run Debug ######
+
+#load and run the test 
+
+#look for test result printed in the terminal.
+
+
+###### Run Release ######
+
+#load and run the test 
+
+#look for test result printed in the terminal.

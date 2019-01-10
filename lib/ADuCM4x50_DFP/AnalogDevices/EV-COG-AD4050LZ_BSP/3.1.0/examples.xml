@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<examples>
+  <example schema-version="1.2">
+    <name>blinky_example</name>
+    <description>Example demonstrating GPIO blinking LEDs</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>gpio, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./source/blinky_example.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_example/EV-COG-AD4050LZ/cces" readme="./source/Readme_blinky_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/blinky_example" type="Debug"/>
+            <config binary="./Release/blinky_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>button_press</name>
+    <description>Example demonstrating blinking LEDs after pressing push button</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>gpio, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./button_press.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/push_button/button_press/EV-COG-AD4050LZ/cces" readme="Readme_button_press.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/button_press" type="Debug"/>
+            <config binary="./Release/button_press" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/push_button/button_press/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/push_button/button_press/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/push_button/button_press"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>rtc_alarm_example</name>
+    <description>Example demonstrating RTC in alarm mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>gpio, rtc, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./source/rtc_alarm_example.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/rtc/rtc_alarm_example/EV-COG-AD4050LZ/cces" readme="./source/Readme_rtc_alarm.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/rtc_alarm_example" type="Debug"/>
+            <config binary="./Release/rtc_alarm_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/rtc/rtc_alarm_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/rtc/rtc_alarm_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/rtc/rtc_alarm_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>spi_loopback_example</name>
+    <description>Example demonstrating SPI in loopback mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>DMA, Power, SPI, WDT, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./spi_loopback.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/spi/spi_loopback_example/EV-COG-AD4050LZ/cces" readme="./Readme_spi_loopback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/spi_loopback_example" type="Debug"/>
+            <config binary="./Release/spi_loopback_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/spi/spi_loopback_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/spi/spi_loopback_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/spi/spi_loopback_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>systick</name>
+    <description>Example demonstrating systick timer generating a specific number of interrupts</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SysTick, Timer, Interrupt, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./systick.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/systick/systick_example/EV-COG-AD4050LZ/cces" readme="Readme_systick.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/systick_example" type="Debug"/>
+            <config binary="./Release/systick_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="systick/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/systick/systick_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="systick" src="Boards/EV-COG-AD4050LZ/Examples/drivers/systick/systick_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/systick/systick_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>tmr_example_gp</name>
+    <description>Example demonstrating general purpose timer in periodic interrupt mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>TMR,EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./tmr_example_gp.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/tmr/tmr_example_gp/EV-COG-AD4050LZ/cces" readme="Readme_tmr_example_gp.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/tmr_example_gp" type="Debug"/>
+            <config binary="./Release/tmr_example_gp" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/tmr/tmr_example_gp/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/tmr/tmr_example_gp/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/tmr/tmr_example_gp"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>uart_autobaud_example</name>
+    <description>Example demonstrating UART in autobaud mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>DMA, Power, UART, WDT, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./Source/autobaud.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_autobaud_example/EV-COG-AD4050LZ/cces" readme="Readme_uart_autobaud.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/uart_autobaud_example" type="Debug"/>
+            <config binary="./Release/uart_autobaud_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_autobaud_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_autobaud_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_autobaud_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>uart_callback_example</name>
+    <description>Example demonstrating UART in callback mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>DMA, Power, UART, WDT, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./src/uart_callback.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_callback_example/EV-COG-AD4050LZ/cces" readme="Readme_uart_callback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/uart_callback_example" type="Debug"/>
+            <config binary="./Release/uart_callback_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_callback_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_callback_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_callback_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>uart_loopback_example</name>
+    <description>Example demonstrating UART in loopback mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>DMA, Power, UART, WDT, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./src/uart_loop_back.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_loopback_example/EV-COG-AD4050LZ/cces" readme="Readme_uart_loopback.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/uart_loopback_example" type="Debug"/>
+            <config binary="./Release/uart_loopback_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_loopback_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_loopback_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/uart/uart_loopback_example"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>wdt_example_reset</name>
+    <description>Example demonstrating WDT in reset mode</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>WDT,EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./wdt_example_reset.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/wdt/wdt_example_reset/EV-COG-AD4050LZ/cces" readme="Readme_wdt_example_reset.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/wdt_example_reset" type="Debug"/>
+            <config binary="./Release/wdt_example_reset" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/wdt/wdt_example_reset/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/wdt/wdt_example_reset/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/wdt/wdt_example_reset"/>
+    </copy-actions>
+  </example>
+  <example schema-version="1.2">
+    <name>xint_example</name>
+    <description>Example demonstrating external pin interrupt (XINT)</description>
+    <families>ARM</families>
+    <processors>ADuCM4050</processors>
+    <platforms>EZ-Kit</platforms>
+    <languages>C</languages>
+    <keywords>SysTick, GPIO, Interrupt, XINT, Power, WDT, EV-COG-AD4050LZ</keywords>
+    <projects>
+      <project mainfile="./xint_example.c" path="Boards/EV-COG-AD4050LZ/Examples/drivers/xint/xint_example/EV-COG-AD4050LZ/cces" readme="Readme_xint_example.txt">
+        <sqe build="yes" run="no">
+          <configs>
+            <config binary="./Debug/xint_example" type="Debug"/>
+            <config binary="./Release/xint_example" type="Release"/>
+          </configs>
+          <result pass="All done!"/>
+        </sqe>
+      </project>
+    </projects>
+    <copy-actions>
+      <copy dst="EV-COG-AD4050LZ/cces" src="Boards/EV-COG-AD4050LZ/Examples/drivers/xint/xint_example/EV-COG-AD4050LZ/cces"/>
+      <copy dst="EV-COG-AD4050LZ" src="Boards/EV-COG-AD4050LZ/Examples/drivers/xint/xint_example/EV-COG-AD4050LZ"/>
+      <copy dst="." src="Boards/EV-COG-AD4050LZ/Examples/drivers/xint/xint_example"/>
+    </copy-actions>
+  </example>
+</examples>

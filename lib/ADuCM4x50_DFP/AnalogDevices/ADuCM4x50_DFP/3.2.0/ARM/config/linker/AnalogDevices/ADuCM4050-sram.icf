@@ -1,0 +1,63 @@
+/*###ICF### Section handled by ICF editor, don't touch! ****/
+/*-Editor annotation file-*/
+/* IcfEditorFile="$TOOLKIT_DIR$\config\ide\IcfEditor\cortex_v1_0.xml" */
+
+/*-Specials-*/
+define symbol __ICFEDIT_intvec_start__ = 0x10000000;
+
+/*-Sizes-*/
+define symbol __ICFEDIT_size_cstack__ = 2K;
+define symbol __ICFEDIT_size_heap__   = 80K;
+
+/**** End of ICF editor section. ###ICF###*/
+
+define memory mem with size        = 4G;
+
+// RAM bank sizes sizes are invariant... locations vary by RAM Mode#
+define symbol RAM_BANK0_SIZE   = 16K;
+define symbol RAM_BANK1_SIZE   = 12K;
+define symbol RAM_BANK2_SIZE   =  4K;
+define symbol RAM_BANK3_SIZE   = 16K;
+define symbol RAM_BANK4_SIZE   = 16K;
+define symbol RAM_BANK5_SIZE   = 32K;
+define symbol RAM_BANK6_SIZE   = 16K;
+define symbol RAM_BANK7_SIZE   = 16K;
+
+// ISRAM
+define symbol RAM_BANK1 = 0x10000000;
+define symbol RAM_BANK7 = 0x10003000;
+define symbol RAM_BANK2 = 0x10007000;
+
+// DSRAM
+define symbol RAM_BANK0 = 0x20000000;
+
+define symbol RAM_BANK3 = 0x20040000;
+define symbol RAM_BANK4 = 0x20044000;
+define symbol RAM_BANK5 = 0x20048000;
+define symbol RAM_BANK6 = 0x20050000;
+
+define region iRAM  = mem:[from RAM_BANK1 size (RAM_BANK1_SIZE + RAM_BANK7_SIZE + RAM_BANK2_SIZE)];
+define region dRAM1 = mem:[from RAM_BANK0 size (RAM_BANK0_SIZE) ];
+define region dRAM2 = mem:[from RAM_BANK3 size (RAM_BANK3_SIZE + RAM_BANK4_SIZE + RAM_BANK5_SIZE + RAM_BANK6_SIZE) ];
+
+// C-Runtime blocks
+define block CSTACK with alignment = 8, size = __ICFEDIT_size_cstack__ { };
+define block HEAP   with alignment = 8, size = __ICFEDIT_size_heap__   { };
+
+// initializations...
+do not initialize          { section .noinit };
+
+// place IVT at start of ISRAM
+place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
+
+// place code in ISRAM
+place in          iRAM     { ro code, section ISRAM_REGION };
+
+// place data and stack in lower, always-retained DSRAM region
+place in          dRAM1    { ro data };
+place in          dRAM1    { rw };
+place in          dRAM1    { zeroinit };
+place at end of   dRAM1    { block CSTACK };
+
+// place heap in upper DSRAM region
+place in          dRAM2    { block HEAP };
