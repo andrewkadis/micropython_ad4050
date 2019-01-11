@@ -277,10 +277,8 @@ bin/dfp/reset_ADuCM4050.o: $(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Source/GCC
 ##########################################################################
 
 # Files from the micropython source
-MPY_OBJS = $(MPY_BIN)/argcheck.o $(MPY_BIN)/asmarm.o $(MPY_BIN)/asmbase.o $(MPY_BIN)/asmthumb.o $(MPY_BIN)/asmx64.o $(MPY_BIN)/asmx86.o $(MPY_BIN)/asmxtensa.o $(MPY_BIN)/bc.o $(MPY_BIN)/binary.o $(MPY_BIN)/builtinevex.o $(MPY_BIN)/builtinhelp.o $(MPY_BIN)/builtinimport.o $(MPY_BIN)/compile.o $(MPY_BIN)/emitbc.o $(MPY_BIN)/emitcommon.o $(MPY_BIN)/emitglue.o $(MPY_BIN)/emitinlinethumb.o $(MPY_BIN)/emitinlinextensa.o $(MPY_BIN)/emitnarm.o $(MPY_BIN)/emitnative.o $(MPY_BIN)/emitnthumb.o $(MPY_BIN)/emitnx64.o $(MPY_BIN)/emitnx86.o $(MPY_BIN)/emitnxtensa.o $(MPY_BIN)/formatfloat.o $(MPY_BIN)/frozenmod.o $(MPY_BIN)/gc.o $(MPY_BIN)/lexer.o $(MPY_BIN)/malloc.o $(MPY_BIN)/map.o $(MPY_BIN)/compile.o $(MPY_BIN)/runtime.o $(MPY_BIN)/repl.o $(MPY_BIN)/gc.o $(MPY_BIN)/pyexec.o $(MPY_BIN)/mpstate.o $(MPY_BIN)/qstr.o $(MPY_BIN)/obj.o $(MPY_BIN)/objdict.o $(MPY_BIN)/objtype.o
+MPY_OBJS = $(MPY_BIN)/argcheck.o $(MPY_BIN)/asmarm.o $(MPY_BIN)/asmbase.o $(MPY_BIN)/asmthumb.o $(MPY_BIN)/asmx64.o $(MPY_BIN)/asmx86.o $(MPY_BIN)/asmxtensa.o $(MPY_BIN)/bc.o $(MPY_BIN)/binary.o $(MPY_BIN)/builtinevex.o $(MPY_BIN)/builtinhelp.o $(MPY_BIN)/builtinimport.o $(MPY_BIN)/compile.o $(MPY_BIN)/emitbc.o $(MPY_BIN)/emitcommon.o $(MPY_BIN)/emitglue.o $(MPY_BIN)/emitinlinethumb.o $(MPY_BIN)/emitinlinextensa.o $(MPY_BIN)/emitnarm.o $(MPY_BIN)/emitnative.o $(MPY_BIN)/emitnthumb.o $(MPY_BIN)/emitnx64.o $(MPY_BIN)/emitnx86.o $(MPY_BIN)/emitnxtensa.o $(MPY_BIN)/formatfloat.o $(MPY_BIN)/frozenmod.o $(MPY_BIN)/gc.o $(MPY_BIN)/lexer.o $(MPY_BIN)/malloc.o $(MPY_BIN)/map.o $(MPY_BIN)/compile.o $(MPY_BIN)/runtime.o $(MPY_BIN)/repl.o $(MPY_BIN)/gc.o $(MPY_BIN)/pyexec.o $(MPY_BIN)/mpstate.o $(MPY_BIN)/qstr.o $(MPY_BIN)/obj.o $(MPY_BIN)/objdict.o $(MPY_BIN)/objtype.o $(MPY_BIN)/modarray.o $(MPY_BIN)/modbuiltins.o $(MPY_BIN)/modcmath.o $(MPY_BIN)/modcollections.o $(MPY_BIN)/modgc.o $(MPY_BIN)/modio.o $(MPY_BIN)/modmath.o $(MPY_BIN)/modmicropython.o $(MPY_BIN)/modstruct.o $(MPY_BIN)/modsys.o $(MPY_BIN)/modthread.o $(MPY_BIN)/moduerrno.o $(MPY_BIN)/mpprint.o $(MPY_BIN)/mpstate.o $(MPY_BIN)/mpz.o $(MPY_BIN)/nativeglue.o $(MPY_BIN)/nlr.o $(MPY_BIN)/nlrsetjmp.o $(MPY_BIN)/nlrthumb.o $(MPY_BIN)/nlrx64.o $(MPY_BIN)/nlrx86.o $(MPY_BIN)/nlrxtensa.o $(MPY_BIN)/obj.o $(MPY_BIN)/objarray.o $(MPY_BIN)/objattrtuple.o $(MPY_BIN)/objbool.o $(MPY_BIN)/objboundmeth.o $(MPY_BIN)/objcell.o $(MPY_BIN)/objclosure.o $(MPY_BIN)/objcomplex.o $(MPY_BIN)/objdeque.o $(MPY_BIN)/objdict.o $(MPY_BIN)/objenumerate.o $(MPY_BIN)/objexcept.o $(MPY_BIN)/objfilter.o $(MPY_BIN)/objfloat.o $(MPY_BIN)/objfun.o $(MPY_BIN)/objgenerator.o $(MPY_BIN)/objgetitemiter.o $(MPY_BIN)/objint.o $(MPY_BIN)/objint_longlong.o $(MPY_BIN)/objint_mpz.o $(MPY_BIN)/objlist.o $(MPY_BIN)/objmap.o $(MPY_BIN)/objnamedtuple.o $(MPY_BIN)/objnone.o $(MPY_BIN)/objobject.o $(MPY_BIN)/objpolyiter.o $(MPY_BIN)/objproperty.o $(MPY_BIN)/objrange.o $(MPY_BIN)/objreversed.o $(MPY_BIN)/objset.o $(MPY_BIN)/objsingleton.o $(MPY_BIN)/objslice.o $(MPY_BIN)/objstr.o $(MPY_BIN)/objstringio.o $(MPY_BIN)/objstrunicode.o $(MPY_BIN)/objtuple.o $(MPY_BIN)/objtype.o $(MPY_BIN)/objzip.o $(MPY_BIN)/opmethods.o $(MPY_BIN)/parse.o $(MPY_BIN)/parsenum.o $(MPY_BIN)/parsenumbase.o $(MPY_BIN)/persistentcode.o $(MPY_BIN)/pystack.o $(MPY_BIN)/qstr.o $(MPY_BIN)/reader.o $(MPY_BIN)/repl.o $(MPY_BIN)/runtime.o $(MPY_BIN)/runtime_utils.o $(MPY_BIN)/scheduler.o $(MPY_BIN)/scope.o $(MPY_BIN)/sequence.o $(MPY_BIN)/showbc.o $(MPY_BIN)/smallint.o $(MPY_BIN)/stackctrl.o $(MPY_BIN)/stream.o $(MPY_BIN)/unicode.o $(MPY_BIN)/vm.o $(MPY_BIN)/vstr.o $(MPY_BIN)/warning
 mpy: $(MPY_OBJS)
-
-modarray modbuiltins modcmath modcollections modgc modio modmath modmicropython modstruct modsys modthread moduerrno mpprint mpstate mpz nativeglue nlr nlrsetjmp nlrthumb nlrx64 nlrx86 nlrxtensa obj objarray objattrtuple objbool objboundmeth objcell objclosure objcomplex objdeque objdict objenumerate objexcept objfilter objfloat objfun objgenerator objgetitemiter objint objint_longlong objint_mpz objlist objmap objnamedtuple
 
 bin/mpy/argcheck.o : ../../py/argcheck.c 
 	@echo 'Building file: $<'
@@ -800,119 +798,147 @@ bin/mpy/objnamedtuple.o : ../../py/objnamedtuple.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-
-
-
-
-
-
-
-
-
-
-
-bin/mpy/objgenerator.o : ../../py/objgenerator.c 
+bin/mpy/objnone.o : ../../py/objnone.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objgetitemiter.o : ../../py/objgetitemiter.c 
+bin/mpy/objobject.o : ../../py/objobject.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objint.o : ../../py/objint.c 
+bin/mpy/objpolyiter.o : ../../py/objpolyiter.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objint_longlong.o : ../../py/objint_longlong.c 
+bin/mpy/objproperty.o : ../../py/objproperty.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objint_mpz.o : ../../py/objint_mpz.c 
+bin/mpy/objrange.o : ../../py/objrange.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objlist.o : ../../py/objlist.c 
+bin/mpy/objreversed.o : ../../py/objreversed.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objmap.o : ../../py/objmap.c 
+bin/mpy/objset.o : ../../py/objset.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objnamedtuple.o : ../../py/objnamedtuple.c 
+bin/mpy/objsingleton.o : ../../py/objsingleton.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Majority of micro-python source comes from ../../py
-bin/mpy/compile.o : ../../py/compile.c 
+bin/mpy/objslice.o : ../../py/objslice.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/runtime.o : ../../py/runtime.c 
+bin/mpy/objstr.o : ../../py/objstr.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/repl.o : ../../py/repl.c 
+bin/mpy/objstringio.o : ../../py/objstringio.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/gc.o : ../../py/gc.c 
+bin/mpy/objstrunicode.o : ../../py/objstrunicode.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/mpstate.o : ../../py/mpstate.c 
+bin/mpy/objtuple.o : ../../py/objtuple.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/objtype.o : ../../py/objtype.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/objzip.o : ../../py/objzip.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/opmethods.o : ../../py/opmethods.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/parse.o : ../../py/parse.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/parsenum.o : ../../py/parsenum.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/parsenumbase.o : ../../py/parsenumbase.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/persistentcode.o : ../../py/persistentcode.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/pystack.o : ../../py/pystack.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
@@ -926,26 +952,186 @@ bin/mpy/qstr.o : ../../py/qstr.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/obj.o : ../../py/obj.c 
+bin/mpy/reader.o : ../../py/reader.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objdict.o : ../../py/objdict.c 
+bin/mpy/repl.o : ../../py/repl.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 
-bin/mpy/objtype.o : ../../py/objtype.c 
+bin/mpy/runtime.o : ../../py/runtime.c 
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
+
+bin/mpy/runtime_utils.o : ../../py/runtime_utils.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/scheduler.o : ../../py/scheduler.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/scope.o : ../../py/scope.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/sequence.o : ../../py/sequence.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/showbc.o : ../../py/showbc.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/smallint.o : ../../py/smallint.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/stackctrl.o : ../../py/stackctrl.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/stream.o : ../../py/stream.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/unicode.o : ../../py/unicode.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/vm.o : ../../py/vm.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/vstr.o : ../../py/vstr.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/warning.o : ../../py/warning.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Majority of micro-python source comes from ../../py
+# bin/mpy/compile.o : ../../py/compile.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/runtime.o : ../../py/runtime.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/repl.o : ../../py/repl.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/gc.o : ../../py/gc.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/mpstate.o : ../../py/mpstate.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/qstr.o : ../../py/qstr.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/obj.o : ../../py/obj.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/objdict.o : ../../py/objdict.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
+
+# bin/mpy/objtype.o : ../../py/objtype.c 
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
 
 
 
