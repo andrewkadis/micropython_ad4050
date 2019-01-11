@@ -13,9 +13,13 @@ CC='/usr/local/Cellar/arm-none-eabi-gcc/7-2018-q2-update/bin/arm-none-eabi-gcc'
 
 # Relative directory addresses for COTS libraries
 # Root Analog Devices directory
-ANALOG_DEVICES_ROOT = ../../AnalogDevices
+ANALOG_DEVICES_ROOT = ../../lib/ADuCM4x50_DFP/AnalogDevices
 # ARM CMSIS Root Directory
-ARM_CMSIS_ROOT      = ../../ARM/
+ARM_CMSIS_ROOT      = ../../lib/ADuCM4x50_DFP/ARM/
+# Micropython Root Directory
+MICROPYTHON_ROOT    = ../..
+# include py core make definitions
+include $(MICROPYTHON_ROOT)/py/py.mk
 
 
 # Overwritten Warnings - disabled these in the compiler so don't get warnings at runtime.
@@ -55,6 +59,11 @@ INCLUDE_PATH += -I$(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Include/config
 INCLUDE_PATH += -I$(ANALOG_DEVICES_ROOT)/EV-COG-AD4050LZ_BSP/3.1.0/Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_example/EV-COG-AD4050LZ/cces/system
 INCLUDE_PATH += -I$(ANALOG_DEVICES_ROOT)/EV-COG-AD4050LZ_BSP/3.1.0/Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_example/EV-COG-AD4050LZ/cces/RTE"
 INCLUDE_PATH += -I$(ANALOG_DEVICES_ROOT)/EV-COG-AD4050LZ_BSP/3.1.0/Boards/EV-COG-AD4050LZ/Examples/drivers/gpio/blinky_exampleEV-COG-AD4050LZ/cces/RTE/Device/ADuCM4050"
+# Micropython
+INCLUDE_PATH += -I$(MICROPYTHON_ROOT)
+INCLUDE_PATH += -I$(MICROPYTHON_ROOT)/py
+INCLUDE_PATH += -I$(MICROPYTHON_ROOT)/ports/ad4050
+INCLUDE_PATH += -I$(MICROPYTHON_ROOT)/mpy-cross/build
 export INCLUDE_PATH
 
 
@@ -302,6 +311,32 @@ $(SRC_BIN)/PinMux.o: ./src/PinMux.c
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
+
+
+
+##########################################################################
+############################ Source Files ################################
+##########################################################################
+
+# Source Files - call whatever we've written
+# main.o = main.o  $(SRC_BIN)/PinMux.o
+python: main.o
+
+# Executable
+main.o: ./main.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+# # Other src files...
+# $(SRC_BIN)/PinMux.o: ./src/PinMux.c
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
 
 
 
