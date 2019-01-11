@@ -43,7 +43,21 @@ POSSIBILITY OF SUCH DAMAGE.
 *****************************************************************************/
 
 
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+
+#include "py/compile.h"
+#include "py/runtime.h"
+#include "py/repl.h"
+#include "py/gc.h"
+#include "py/mperrno.h"
+#include "lib/utils/pyexec.h"
+
+
 #include "port.h"
+
+
 
 // typedef struct {
 //     ADI_GPIO_PORT Port;
@@ -61,71 +75,75 @@ POSSIBILITY OF SUCH DAMAGE.
 // PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_0};   /* Green LED on GPIO32 (DS3) */
 // #endif
 
+// Helper function to init the AD4050
+static void init_ad4050();
+
+// Static variables
+static char *stack_top;
+
 
 int main(void)
 {
 
+    // Init Code
+    init_ad4050();
+
+    // Run Micropython
+    int stack_dummy;
+    stack_top = (char*)&stack_dummy;
+
+    // #if MICROPY_ENABLE_GC
+    // gc_init(heap, heap + sizeof(heap));
+    // #endif
+
+    mp_init();
+
+    // #if MICROPY_ENABLE_COMPILER
+    // #if MICROPY_REPL_EVENT_DRIVEN
+    // pyexec_event_repl_init();
+    // for (;;) {
+    //     int c = mp_hal_stdin_rx_chr();
+    //     if (pyexec_event_repl_process_char(c)) {
+    //         break;
+    //     }
+    // }
+    // #else
+    // pyexec_friendly_repl();
+    // #endif
+    // //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
+    // //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
+    // #else
+    // pyexec_frozen_module("frozentest.py");
+    // #endif
+    
+    mp_deinit();
+    return 0;
 
 
-    /* Initialize the power service */
-    if (ADI_PWR_SUCCESS != adi_pwr_Init())
-    {
-        return 1;
-    }
-    if (ADI_PWR_SUCCESS != adi_pwr_SetClockDivider(ADI_CLOCK_HCLK,1))
-    {
-        return 1;
-    }
-    if (ADI_PWR_SUCCESS != adi_pwr_SetClockDivider(ADI_CLOCK_PCLK,1))
-    {
-        return 1;
-    }
+    // while(true){
 
+    //     for (volatile uint32_t i = 0; i < 1000000; i++){}
 
+    //     /* Begin adding your custom code here */
+    //     // common_Perf("Hello, world!\n");
+    //     // printf("Hello, world!\n");
 
-    char aDebugString[150u];
-    ADI_UART_HANDLE hDevOutput = NULL;
-    ADI_ALIGNED_PRAGMA(4)
-    uint8_t OutDeviceMem[ADI_UART_UNIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
-    #define UART0_TX_PORTP0_MUX (1u<<20)
-    #define UART0_RX_PORTP0_MUX (1u<<22)
+    //     char sendMe[] = "Hello, world!\n\r";
+    //     /* Ignore return codes since there's nothing we can do if it fails */
+    //     uint32_t pHwError;
+    //     adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
 
-    /* Set the pinmux for the UART */
-    *pREG_GPIO0_CFG |= UART0_TX_PORTP0_MUX | UART0_RX_PORTP0_MUX;
+    //     // Get our baudrate
 
-    /* Open the UART device, data transfer is bidirectional with NORMAL mode by default */
+    //     // uint32_t baudrate = 0;
+    //     // adi_uart_GetBaudRate(hDevOutput, &baudrate, &pHwError);
 
-    adi_uart_Open(0u, ADI_UART_DIR_TRANSMIT, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
+    //     // uint32_t baud2 = baudrate;
+    //     // adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
 
-    // Need to configure clock after Uart has been opened
-    adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
-    // adi_uart_EnableAutobaud(hDevOutput, false, ADI_UART_AUTOBAUD_NO_ERROR);
+    // }
 
-
-    while(true){
-
-        for (volatile uint32_t i = 0; i < 1000000; i++){}
-
-        /* Begin adding your custom code here */
-        // common_Perf("Hello, world!\n");
-        // printf("Hello, world!\n");
-
-        char sendMe[] = "Hello, world!\n\r";
-        /* Ignore return codes since there's nothing we can do if it fails */
-        uint32_t pHwError;
-        adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
-
-        // Get our baudrate
-
-        // uint32_t baudrate = 0;
-        // adi_uart_GetBaudRate(hDevOutput, &baudrate, &pHwError);
-
-        // uint32_t baud2 = baudrate;
-        // adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
-
-    }
-
-	return 0;
+	// return 0;
 
 
     // uint8_t         gpioMemory[ADI_GPIO_MEMORY_SIZE] = {0};
@@ -214,3 +232,38 @@ int main(void)
 
     return 0;
 }
+
+void init_ad4050(){
+
+    /* Initialize the power service */
+    if (ADI_PWR_SUCCESS != adi_pwr_Init())
+    {
+        return 1;
+    }
+    if (ADI_PWR_SUCCESS != adi_pwr_SetClockDivider(ADI_CLOCK_HCLK,1))
+    {
+        return 1;
+    }
+    if (ADI_PWR_SUCCESS != adi_pwr_SetClockDivider(ADI_CLOCK_PCLK,1))
+    {
+        return 1;
+    }
+    char aDebugString[150u];
+    ADI_UART_HANDLE hDevOutput = NULL;
+    ADI_ALIGNED_PRAGMA(4)
+    uint8_t OutDeviceMem[ADI_UART_UNIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
+    #define UART0_TX_PORTP0_MUX (1u<<20)
+    #define UART0_RX_PORTP0_MUX (1u<<22)
+
+    /* Set the pinmux for the UART */
+    *pREG_GPIO0_CFG |= UART0_TX_PORTP0_MUX | UART0_RX_PORTP0_MUX;
+
+    /* Open the UART device, data transfer is bidirectional with NORMAL mode by default */
+    adi_uart_Open(0u, ADI_UART_DIR_TRANSMIT, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
+
+    // Need to configure clock after Uart has been opened
+    adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
+    // adi_uart_EnableAutobaud(hDevOutput, false, ADI_UART_AUTOBAUD_NO_ERROR);
+
+}
+

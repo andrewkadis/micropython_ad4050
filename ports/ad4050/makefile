@@ -88,16 +88,18 @@ export LIBS = $(LIBRARIES)
 EXE := port
 
 # All Target
-all: dir DFP sys src exe
+all: dir DFP mpy sys src exe
 
 # Directories to put generated files into
 BIN     = ./bin
 DFP_BIN = $(BIN)/dfp
+MPY_BIN = $(BIN)/mpy
 SYS_BIN = $(BIN)/sys
 SRC_BIN = $(BIN)/src
 dir: 
 	mkdir -p $(BIN)
 	mkdir -p $(DFP_BIN)
+	mkdir -p $(MPY_BIN)
 	mkdir -p $(SYS_BIN)
 	mkdir -p $(SRC_BIN)
 
@@ -271,6 +273,87 @@ bin/dfp/reset_ADuCM4050.o: $(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Source/GCC
 
 
 ##########################################################################
+######################### Micropython Files ##############################
+##########################################################################
+
+# Files from the micropython source
+MPY_OBJS = $(MPY_BIN)/compile.o $(MPY_BIN)/runtime.o $(MPY_BIN)/repl.o $(MPY_BIN)/gc.o $(MPY_BIN)/pyexec.o $(MPY_BIN)/mpstate.o $(MPY_BIN)/qstr.o $(MPY_BIN)/obj.o $(MPY_BIN)/objdict.o $(MPY_BIN)/objtype.o
+mpy: $(MPY_OBJS)
+
+# Majority of micro-python source comes from ../../py
+bin/mpy/compile.o : ../../py/compile.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/runtime.o : ../../py/runtime.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/repl.o : ../../py/repl.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/gc.o : ../../py/gc.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/mpstate.o : ../../py/mpstate.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/qstr.o : ../../py/qstr.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/obj.o : ../../py/obj.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/objdict.o : ../../py/objdict.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+bin/mpy/objtype.o : ../../py/objtype.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+# Executable comes from the lib directory
+bin/mpy/pyexec.o : ../../lib/utils/pyexec.c 
+	@echo 'Building file: $<'
+	@echo 'Invoking: ARM GCC Compiler'
+	$(CC) $(CFLAGS) -o  "$@" "$<"
+	@echo 'Finished building: $<'
+	@echo ' '
+
+
+##########################################################################
 ############################ System Files ################################
 ##########################################################################
 
@@ -318,17 +401,17 @@ $(SRC_BIN)/PinMux.o: ./src/PinMux.c
 ############################ Source Files ################################
 ##########################################################################
 
-# Source Files - call whatever we've written
-# main.o = main.o  $(SRC_BIN)/PinMux.o
-python: main.o
+# # Source Files - call whatever we've written
+# # main.o = main.o  $(SRC_BIN)/PinMux.o
+# python: main.o
 
-# Executable
-main.o: ./main.c
-	@echo 'Building file: $<'
-	@echo 'Invoking: ARM GCC Compiler'
-	$(CC) $(CFLAGS) -o  "$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
+# # Executable
+# main.o: ./src/main.c
+# 	@echo 'Building file: $<'
+# 	@echo 'Invoking: ARM GCC Compiler'
+# 	$(CC) $(CFLAGS) -o  "$@" "$<"
+# 	@echo 'Finished building: $<'
+# 	@echo ' '
 
 # # Other src files...
 # $(SRC_BIN)/PinMux.o: ./src/PinMux.c
@@ -348,7 +431,7 @@ main.o: ./main.c
 exe: $(USER_OBJS) $(SRC_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM GCC Linker'
-	arm-none-eabi-gcc -T$(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Source/GCC/ADuCM4050.ld -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -o  '$(BIN)/$(EXE).elf' -Xlinker -Map='$(BIN)/$(EXE).map' $(DRIVER_OBJS) $(STARTUP_OBJS) $(SYS_OBJS) $(SRC_OBJS) $(LIBS)
+	arm-none-eabi-gcc -T$(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Source/GCC/ADuCM4050.ld -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -o  '$(BIN)/$(EXE).elf' -Xlinker -Map='$(BIN)/$(EXE).map' $(DRIVER_OBJS) $(MPY_OBJS) $(STARTUP_OBJS) $(SYS_OBJS) $(SRC_OBJS) $(LIBS) 
 	# Generate srec, bin and hex formats
 	arm-none-eabi-objcopy -Osrec '$(BIN)/$(EXE).elf' '$(BIN)/$(EXE).srec'
 	arm-none-eabi-objcopy -Oihex '$(BIN)/$(EXE).elf' '$(BIN)/$(EXE).hex'
