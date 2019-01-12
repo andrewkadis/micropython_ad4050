@@ -81,7 +81,8 @@ static void init_ad4050();
 // Static variables
 static char *stack_top;
 // Uart
-ADI_UART_HANDLE hDevOutput = NULL;
+static ADI_UART_HANDLE hDevOutput = NULL;
+static char sendMe[] = "Hello, world!\n\r";
 
 
 int main(void)
@@ -317,8 +318,14 @@ int mp_hal_stdin_rx_chr(void){
 
 #ifndef mp_hal_stdout_tx_strn
 void mp_hal_stdout_tx_strn(const char *str, size_t len){
-    uint32_t pHwError;
-    adi_uart_Write(hDevOutput, str, len, false, &pHwError);
+    // uint32_t pHwError;
+    // adi_uart_Write(hDevOutput, str, len, false, &pHwError);
+
+
+        /* Ignore return codes since there's nothing we can do if it fails */
+        uint32_t pHwError;
+        adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
+
 }
 #endif
 
