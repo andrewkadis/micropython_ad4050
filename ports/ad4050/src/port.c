@@ -80,6 +80,8 @@ static void init_ad4050();
 
 // Static variables
 static char *stack_top;
+// Uart
+ADI_UART_HANDLE hDevOutput = NULL;
 
 
 int main(void)
@@ -117,6 +119,8 @@ int main(void)
     #endif
     
     mp_deinit();
+
+    
     return 0;
 
 
@@ -249,7 +253,7 @@ void init_ad4050(){
         return 1;
     }
     char aDebugString[150u];
-    ADI_UART_HANDLE hDevOutput = NULL;
+    hDevOutput = NULL;
     ADI_ALIGNED_PRAGMA(4)
     uint8_t OutDeviceMem[ADI_UART_UNIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
     #define UART0_TX_PORTP0_MUX (1u<<20)
@@ -296,4 +300,54 @@ void MP_WEAK __assert_func(const char *file, int line, const char *func, const c
     printf("Assertion '%s' failed, at file %s:%d\n", expr, file, line);
     __fatal_error("Assertion failed");
 }
+#endif
+
+
+
+
+
+
+
+// HAL Functions, overwrite these
+#ifndef mp_hal_stdin_rx_chr
+// TODO: Fill in
+int mp_hal_stdin_rx_chr(void){
+}
+#endif
+
+#ifndef mp_hal_stdout_tx_strn
+void mp_hal_stdout_tx_strn(const char *str, size_t len){
+    uint32_t pHwError;
+    adi_uart_Write(hDevOutput, str, len, false, &pHwError);
+}
+#endif
+
+#ifndef mp_hal_delay_ms
+void mp_hal_delay_ms(mp_uint_t ms);
+#endif
+
+#ifndef mp_hal_delay_us
+void mp_hal_delay_us(mp_uint_t us);
+#endif
+
+#ifndef mp_hal_ticks_ms
+mp_uint_t mp_hal_ticks_ms(void);
+#endif
+
+#ifndef mp_hal_ticks_us
+mp_uint_t mp_hal_ticks_us(void);
+#endif
+
+#ifndef mp_hal_ticks_cpu
+mp_uint_t mp_hal_ticks_cpu(void);
+#endif
+
+// If port HAL didn't define its own pin API, use generic
+// "virtual pin" API from the core.
+#ifndef mp_hal_pin_obj_t
+#define mp_hal_pin_obj_t mp_obj_t
+#define mp_hal_get_pin_obj(pin) (pin)
+#define mp_hal_pin_read(pin) mp_virtual_pin_read(pin)
+#define mp_hal_pin_write(pin, v) mp_virtual_pin_write(pin, v)
+#include "extmod/virtpin.h"
 #endif
