@@ -1042,7 +1042,7 @@ void mp_load_method_maybe(mp_obj_t obj, qstr attr, mp_obj_t *dest) {
 #endif
 
     } else if (attr == MP_QSTR___next__ && type->iternext != NULL) {
-        dest[0] = MP_OBJ_FROM_PTR(&mp_builtin_next_obj);
+        // dest[0] = MP_OBJ_FROM_PTR(&mp_builtin_next_obj);
         dest[1] = obj;
 
     } else if (type->attr != NULL) {
