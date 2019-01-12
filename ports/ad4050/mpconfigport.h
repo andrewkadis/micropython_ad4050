@@ -5,7 +5,7 @@
 // You can disable the built-in MicroPython compiler by setting the following
 // config option to 0.  If you do this then you won't get a REPL prompt, but you
 // will still be able to execute pre-compiled scripts, compiled with mpy-cross.
-#define MICROPY_ENABLE_COMPILER     (0)
+#define MICROPY_ENABLE_COMPILER     (1)
 
 #define MICROPY_QSTR_BYTES_IN_HASH  (1)
 // #define MICROPY_QSTR_EXTRA_POOL     //mp_qstr_frozen_const_pool
@@ -41,7 +41,7 @@
 #define MICROPY_PY_BUILTINS_PROPERTY (0)
 #define MICROPY_PY_BUILTINS_MIN_MAX (0)
 #define MICROPY_PY_BUILTINS_STR_COUNT (0)
-#define MICROPY_PY_BUILTINS_STR_OP_MODULO (0)
+#define MICROPY_PY_BUILTINS_STR_OP_MODULO (1)
 #define MICROPY_PY___FILE__         (0)
 #define MICROPY_PY_GC               (0)
 #define MICROPY_PY_ARRAY            (0)
@@ -75,8 +75,8 @@ typedef long mp_off_t;
 #define MP_PLAT_PRINT_STRN(str, len) mp_hal_stdout_tx_strn_cooked(str, len)
 
 // extra built in names to add to the global namespace
-#define MICROPY_PORT_BUILTINS \
-    { MP_ROM_QSTR(MP_QSTR_open), MP_ROM_PTR(&mp_builtin_open_obj) },
+// #define MICROPY_PORT_BUILTINS
+//     { MP_ROM_QSTR(MP_QSTR_open), MP_ROM_PTR(&mp_builtin_open_obj) },
 
 // We need to provide a declaration/definition of alloca()
 #include <alloca.h>

@@ -98,23 +98,23 @@ int main(void)
 
     mp_init();
 
-    // #if MICROPY_ENABLE_COMPILER
-    // #if MICROPY_REPL_EVENT_DRIVEN
-    // pyexec_event_repl_init();
-    // for (;;) {
-    //     int c = mp_hal_stdin_rx_chr();
-    //     if (pyexec_event_repl_process_char(c)) {
-    //         break;
-    //     }
-    // }
-    // #else
-    // pyexec_friendly_repl();
-    // #endif
-    // //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
-    // //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
-    // #else
-    // pyexec_frozen_module("frozentest.py");
-    // #endif
+    #if MICROPY_ENABLE_COMPILER
+    #if MICROPY_REPL_EVENT_DRIVEN
+    pyexec_event_repl_init();
+    for (;;) {
+        int c = mp_hal_stdin_rx_chr();
+        if (pyexec_event_repl_process_char(c)) {
+            break;
+        }
+    }
+    #else
+    pyexec_friendly_repl();
+    #endif
+    //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
+    //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
+    #else
+    pyexec_frozen_module("frozentest.py");
+    #endif
     
     mp_deinit();
     return 0;
@@ -267,3 +267,33 @@ void init_ad4050(){
 
 }
 
+mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
+    mp_raise_OSError(MP_ENOENT);
+}
+
+mp_import_stat_t mp_import_stat(const char *path) {
+    return MP_IMPORT_STAT_NO_EXIST;
+}
+
+mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) {
+    return mp_const_none;
+}
+MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
+
+// This must be implemented by a port.  It's called by nlr_jump
+// if no nlr buf has been pushed.  It must not return, but rather
+// should bail out with a fatal error.
+NORETURN void nlr_jump_fail(void *val){
+    while (1);
+}
+
+void NORETURN __fatal_error(const char *msg) {
+    while (1);
+}
+
+#ifndef NDEBUG
+void MP_WEAK __assert_func(const char *file, int line, const char *func, const char *expr) {
+    printf("Assertion '%s' failed, at file %s:%d\n", expr, file, line);
+    __fatal_error("Assertion failed");
+}
+#endif
