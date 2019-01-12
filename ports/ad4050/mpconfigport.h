@@ -8,7 +8,7 @@
 #define MICROPY_ENABLE_COMPILER     (0)
 
 #define MICROPY_QSTR_BYTES_IN_HASH  (1)
-#define MICROPY_QSTR_EXTRA_POOL     mp_qstr_frozen_const_pool
+// #define MICROPY_QSTR_EXTRA_POOL     //mp_qstr_frozen_const_pool
 #define MICROPY_ALLOC_PATH_MAX      (256)
 #define MICROPY_ALLOC_PARSE_CHUNK_INIT (16)
 #define MICROPY_EMIT_X64            (0)
@@ -20,10 +20,10 @@
 #define MICROPY_COMP_TRIPLE_TUPLE_ASSIGN (0)
 #define MICROPY_MEM_STATS           (0)
 #define MICROPY_DEBUG_PRINTERS      (0)
-#define MICROPY_ENABLE_GC           (1)
+#define MICROPY_ENABLE_GC           (0)
 #define MICROPY_GC_ALLOC_THRESHOLD  (0)
 #define MICROPY_REPL_EVENT_DRIVEN   (0)
-#define MICROPY_HELPER_REPL         (1)
+#define MICROPY_HELPER_REPL         (0)
 #define MICROPY_HELPER_LEXER_UNIX   (0)
 #define MICROPY_ENABLE_SOURCE_LINE  (0)
 #define MICROPY_ENABLE_DOC_STRING   (0)
@@ -90,7 +90,7 @@ typedef long mp_off_t;
 
 // #ifdef __thumb__
 #define MICROPY_MIN_USE_CORTEX_CPU (1)
-#define MICROPY_MIN_USE_STM32_MCU (1)
+#define MICROPY_MIN_USE_STM32_MCU (0)
 // #endif
 
 #define MP_STATE_PORT MP_STATE_VM

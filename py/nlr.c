@@ -49,3 +49,8 @@ void nlr_pop(void) {
     nlr_buf_t **top = &MP_STATE_THREAD(nlr_top);
     *top = (*top)->prev;
 }
+
+// This must be implemented by a port.  It's called by nlr_jump
+// if no nlr buf has been pushed.  It must not return, but rather
+// should bail out with a fatal error.
+NORETURN void nlr_jump_fail(void *val){}
