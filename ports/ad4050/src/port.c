@@ -284,10 +284,10 @@ void init_ad4050(){
 
 void sendTestString(){
     char welcomeMsg[] = "Uart Testing...\n\r";
-    while(true){
-        for (volatile uint32_t i = 0; i < 1000000; i++){};
-        adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
-    }
+    // while(true){
+    //     for (volatile uint32_t i = 0; i < 1000000; i++){};
+    //     adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+    // }
 }
 
 mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
@@ -336,12 +336,9 @@ int mp_hal_stdin_rx_chr(void){
 
 #ifndef mp_hal_stdout_tx_strn
 void mp_hal_stdout_tx_strn(const char *str, size_t len){
-    // uint32_t pHwError;
-    // adi_uart_Write(hDevOutput, str, len, false, &pHwError);
-
 
         /* Ignore return codes since there's nothing we can do if it fails */
-        adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pUartHwError);
+        adi_uart_Write(hDevOutput, str, strlen(str), false, &pUartHwError);
 
 }
 #endif
