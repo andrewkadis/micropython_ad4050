@@ -5,7 +5,14 @@
 		},
 		{
 			"path": "/Users/kadds/OneDrive - University Of Cambridge/Drive/Dev/micropython_ad4050/lib/ADuCM4x50_DFP"
+		},
+		{
+			"path": "/Users/kadds/OneDrive - University Of Cambridge/Drive/Dev/micropython_ad4050/py"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"sstream": "c"
+		}
+	}
 }

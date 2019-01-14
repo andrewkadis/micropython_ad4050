@@ -49,7 +49,7 @@
 #define MICROPY_OPT_CACHE_MAP_LOOKUP_IN_BYTECODE (0)
 
 #define MICROPY_READER_POSIX        (1)
-#define MICROPY_ENABLE_RUNTIME      (0)
+#define MICROPY_ENABLE_RUNTIME      (1)
 #define MICROPY_ENABLE_GC           (1)
 #define MICROPY_STACK_CHECK         (1)
 #define MICROPY_HELPER_LEXER_UNIX   (1)
