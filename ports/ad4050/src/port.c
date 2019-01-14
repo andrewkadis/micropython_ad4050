@@ -77,11 +77,15 @@ POSSIBILITY OF SUCH DAMAGE.
 
 // Helper function to init the AD4050
 static void init_ad4050();
+static void sendTestString();
 
 // Static variables
 static char *stack_top;
 // Uart
 static ADI_UART_HANDLE hDevOutput = NULL;
+uint32_t pUartHwError = NULL;
+// Uart Buffer
+static uint8_t OutDeviceMem[ADI_UART_UNIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
 static char sendMe[] = "Hello, world!\n\r";
 
 
@@ -90,6 +94,9 @@ int main(void)
 
     // Init Code
     init_ad4050();
+
+    // Print for Debug
+    sendTestString();
 
     // Run Micropython
     int stack_dummy;
@@ -256,7 +263,6 @@ void init_ad4050(){
     char aDebugString[150u];
     hDevOutput = NULL;
     ADI_ALIGNED_PRAGMA(4)
-    uint8_t OutDeviceMem[ADI_UART_UNIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
     #define UART0_TX_PORTP0_MUX (1u<<20)
     #define UART0_RX_PORTP0_MUX (1u<<22)
 
@@ -264,12 +270,24 @@ void init_ad4050(){
     *pREG_GPIO0_CFG |= UART0_TX_PORTP0_MUX | UART0_RX_PORTP0_MUX;
 
     /* Open the UART device, data transfer is bidirectional with NORMAL mode by default */
-    adi_uart_Open(0u, ADI_UART_DIR_TRANSMIT, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
+    adi_uart_Open(0u, ADI_UART_DIR_BIDIRECTION, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
 
     // Need to configure clock after Uart has been opened
     adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
     // adi_uart_EnableAutobaud(hDevOutput, false, ADI_UART_AUTOBAUD_NO_ERROR);
 
+    // Printout for Debug
+    char welcomeMsg[] = "\n\r\n\r\n\r*******************\n\r***** STARTUP *****\n\r*******************\n\rUart Enabled...\n\r";
+    adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+
+}
+
+void sendTestString(){
+    char welcomeMsg[] = "Uart Testing...\n\r";
+    while(true){
+        for (volatile uint32_t i = 0; i < 1000000; i++){};
+        adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+    }
 }
 
 mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
@@ -323,8 +341,7 @@ void mp_hal_stdout_tx_strn(const char *str, size_t len){
 
 
         /* Ignore return codes since there's nothing we can do if it fails */
-        uint32_t pHwError;
-        adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
+        adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pUartHwError);
 
 }
 #endif
