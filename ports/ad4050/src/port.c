@@ -88,6 +88,18 @@ uint32_t pUartHwError = NULL;
 static uint8_t OutDeviceMem[ADI_UART_BIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
 static char sendMe[] = "Hello, world!\n\r";
 
+// LED GPIOs
+static uint8_t gpioMemory[ADI_GPIO_MEMORY_SIZE] = {0};
+static ADI_GPIO_RESULT eGpioResult = 0;
+typedef struct {
+    ADI_GPIO_PORT Port;
+    ADI_GPIO_DATA Pins;
+} PinMap;
+static PinMap MSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_10};  /*   Red LED on GPIO42 (DS4) */
+static PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_2};   /* Green LED on GPIO34 (DS3) */
+
+
+
 
 int main(void)
 {
@@ -105,6 +117,18 @@ int main(void)
     // #if MICROPY_ENABLE_GC
     // gc_init(heap, heap + sizeof(heap));
     // #endif
+
+     eGpioResult = adi_gpio_SetHigh (MSB.Port, MSB.Pins);
+    DEBUG_RESULT("adi_gpio_SetHigh (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
+    eGpioResult = adi_gpio_SetHigh(LSB.Port,  LSB.Pins);
+    DEBUG_RESULT("adi_gpio_SetHigh (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
+    // eGpioResult = adi_gpio_SetLow (MSB.Port, MSB.Pins);
+    // DEBUG_RESULT("adi_gpio_SetLow (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
+    // eGpioResult = adi_gpio_SetLow(LSB.Port,  LSB.Pins);
+    // DEBUG_RESULT("adi_gpio_SetLow (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
 
     mp_init();
 
@@ -130,122 +154,11 @@ int main(void)
 
     
     return 0;
-
-
-    // while(true){
-
-    //     for (volatile uint32_t i = 0; i < 1000000; i++){}
-
-    //     /* Begin adding your custom code here */
-    //     // common_Perf("Hello, world!\n");
-    //     // printf("Hello, world!\n");
-
-    //     char sendMe[] = "Hello, world!\n\r";
-    //     /* Ignore return codes since there's nothing we can do if it fails */
-    //     uint32_t pHwError;
-    //     adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
-
-    //     // Get our baudrate
-
-    //     // uint32_t baudrate = 0;
-    //     // adi_uart_GetBaudRate(hDevOutput, &baudrate, &pHwError);
-
-    //     // uint32_t baud2 = baudrate;
-    //     // adi_uart_Write(hDevOutput, sendMe, strlen(sendMe), false, &pHwError);
-
-    // }
-
-	// return 0;
-
-
-    // uint8_t         gpioMemory[ADI_GPIO_MEMORY_SIZE] = {0};
-    // uint32_t        count = 0;
-    // ADI_PWR_RESULT  ePwrResult;
-    // ADI_GPIO_RESULT eGpioResult;
-
-    // /* common init */
-    // common_Init();
-
-    // ePwrResult = adi_pwr_Init();
-    // DEBUG_RESULT("adi_pwr_Init failed.", ePwrResult, ADI_PWR_SUCCESS);
-
-    // ePwrResult = adi_pwr_SetClockDivider(ADI_CLOCK_HCLK, 1u);
-    // DEBUG_RESULT("adi_pwr_SetClockDivider (HCLK) failed.", ePwrResult, ADI_PWR_SUCCESS);
-
-    // ePwrResult = adi_pwr_SetClockDivider(ADI_CLOCK_PCLK, 1u);
-    // DEBUG_RESULT("adi_pwr_SetClockDivider (PCLK) failed.", ePwrResult, ADI_PWR_SUCCESS);
-
-    // /* Initialize GPIO driver */
-    // eGpioResult= adi_gpio_Init(gpioMemory, ADI_GPIO_MEMORY_SIZE);
-    // DEBUG_RESULT("adi_GPIO_Init failed.", eGpioResult, ADI_GPIO_SUCCESS);
-
-    // /* Enable MSB output */
-    // eGpioResult = adi_gpio_OutputEnable(MSB.Port, MSB.Pins, true);
-    // DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on MSB.", eGpioResult, ADI_GPIO_SUCCESS);
-
-    // /* Enable LSB output */
-    // eGpioResult = adi_gpio_OutputEnable(LSB.Port, LSB.Pins, true);
-    // DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on LSB.", eGpioResult, ADI_GPIO_SUCCESS);
-
-
-	// /* Begin adding your custom code here */
-	// printf("Hello, world!\n");
-
-    // /* Loop indefinitely */
-    // while (count <= MAX_COUNT)  {
-
-    //     /* Delay between iterations */
-    //     for (volatile uint32_t i = 0; i < 1000000; i++);
-
-    //     /* Blink count (mod4) on the LEDs */
-
-    //     printf("Hello, world!\n");
-
-    //     switch (count%4) {
-    //     case 3:
-    //         eGpioResult = adi_gpio_SetHigh (MSB.Port, MSB.Pins);
-    //         DEBUG_RESULT("adi_gpio_SetHigh (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
-    //         eGpioResult = adi_gpio_SetHigh(LSB.Port,  LSB.Pins);
-    //         DEBUG_RESULT("adi_gpio_SetHigh (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
-    //         break;
-
-    //     case 2:
-    //         eGpioResult = adi_gpio_SetHigh (MSB.Port, MSB.Pins);
-    //         DEBUG_RESULT("adi_gpio_SetHigh (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
-    //         eGpioResult = adi_gpio_SetLow(LSB.Port,  LSB.Pins);
-    //          DEBUG_RESULT("adi_gpio_SetLow (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
-    //          break;
-
-    //     case 1:
-    //         eGpioResult = adi_gpio_SetLow (MSB.Port, MSB.Pins);
-    //         DEBUG_RESULT("adi_gpio_SetLow (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
-    //         eGpioResult = adi_gpio_SetHigh(LSB.Port,  LSB.Pins);
-    //          DEBUG_RESULT("adi_gpio_SetHigh (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
-    //          break;
-
-    //     case 0:
-    //         eGpioResult = adi_gpio_SetLow (MSB.Port, MSB.Pins);
-    //         DEBUG_RESULT("adi_gpio_SetLow (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
-    //         eGpioResult = adi_gpio_SetLow(LSB.Port,  LSB.Pins);
-    //         DEBUG_RESULT("adi_gpio_SetLow (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
-    //         break;
-
-    //     }
-
-    //     count++;
-
-    // }
-
-    // common_Pass();
-
-    return 0;
 }
 
 void init_ad4050(){
+
+
 
     /* Initialize the power service */
     if (ADI_PWR_SUCCESS != adi_pwr_Init())
@@ -260,6 +173,24 @@ void init_ad4050(){
     {
         return 1;
     }
+
+
+
+
+    /* Initialize GPIO driver */
+    eGpioResult= adi_gpio_Init(gpioMemory, ADI_GPIO_MEMORY_SIZE);
+    DEBUG_RESULT("adi_GPIO_Init failed.", eGpioResult, ADI_GPIO_SUCCESS);
+
+    /* Enable MSB output */
+    eGpioResult = adi_gpio_OutputEnable(MSB.Port, MSB.Pins, true);
+    DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on MSB.", eGpioResult, ADI_GPIO_SUCCESS);
+
+    /* Enable LSB output */
+    eGpioResult = adi_gpio_OutputEnable(LSB.Port, LSB.Pins, true);
+    DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on LSB.", eGpioResult, ADI_GPIO_SUCCESS);
+
+
+
     char aDebugString[150u];
     hDevOutput = NULL;
     ADI_ALIGNED_PRAGMA(4)
@@ -279,6 +210,8 @@ void init_ad4050(){
     // Printout for Debug
     char welcomeMsg[] = "\n\r\n\r\n\r*******************\n\r***** STARTUP *****\n\r*******************\n\rUart Enabled...\n\r";
     adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+
+    
 
 }
 
