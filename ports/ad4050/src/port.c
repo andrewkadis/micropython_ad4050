@@ -82,10 +82,10 @@ static void sendTestString();
 // Static variables
 static char *stack_top;
 // Uart
-static ADI_UART_HANDLE hDevOutput = NULL;
+static ADI_UART_CONST_HANDLE hDevOutput = NULL;
 uint32_t pUartHwError = NULL;
 // Uart Buffer
-static uint8_t OutDeviceMem[ADI_UART_UNIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
+static uint8_t OutDeviceMem[ADI_UART_BIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
 static char sendMe[] = "Hello, world!\n\r";
 
 
@@ -331,14 +331,20 @@ void MP_WEAK __assert_func(const char *file, int line, const char *func, const c
 #ifndef mp_hal_stdin_rx_chr
 // TODO: Fill in
 int mp_hal_stdin_rx_chr(void){
+
+    /* Ignore return codes since there's nothing we can do if it fails */
+    int recv_char = 0;
+    adi_uart_Read(hDevOutput, &recv_char, 1, 0, &pUartHwError);
+    return recv_char;
+
 }
 #endif
 
 #ifndef mp_hal_stdout_tx_strn
 void mp_hal_stdout_tx_strn(const char *str, size_t len){
 
-        /* Ignore return codes since there's nothing we can do if it fails */
-        adi_uart_Write(hDevOutput, str, strlen(str), false, &pUartHwError);
+    /* Ignore return codes since there's nothing we can do if it fails */
+    adi_uart_Write(hDevOutput, str, strlen(str), false, &pUartHwError);
 
 }
 #endif
