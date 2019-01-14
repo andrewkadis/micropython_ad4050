@@ -342,8 +342,21 @@ int mp_hal_stdin_rx_chr(void){
 #ifndef mp_hal_stdout_tx_strn
 void mp_hal_stdout_tx_strn(const char *str, size_t len){
 
-    /* Ignore return codes since there's nothing we can do if it fails */
-    adi_uart_Write(hDevOutput, str, len, false, &pUartHwError);
+    // Are we receiving a special character?
+    char firstChar = *str;
+    if( firstChar=='\b' ){
+
+        // Micropythonn is sending us spacing characters so print them
+        // adi_uart_Write(hDevOutput, str, 1, false, &pUartHwError);
+        char tx_me = 0x20;
+        adi_uart_Write(hDevOutput, tx_me, 1, false, &pUartHwError);
+
+    }else{
+
+        // Not receiving a special character, print out what we received
+        adi_uart_Write(hDevOutput, str, len, false, &pUartHwError);
+
+    }
 
 }
 #endif
