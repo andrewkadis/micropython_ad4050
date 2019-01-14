@@ -329,7 +329,6 @@ void MP_WEAK __assert_func(const char *file, int line, const char *func, const c
 
 // HAL Functions, overwrite these
 #ifndef mp_hal_stdin_rx_chr
-// TODO: Fill in
 int mp_hal_stdin_rx_chr(void){
 
     /* Ignore return codes since there's nothing we can do if it fails */
@@ -344,7 +343,7 @@ int mp_hal_stdin_rx_chr(void){
 void mp_hal_stdout_tx_strn(const char *str, size_t len){
 
     /* Ignore return codes since there's nothing we can do if it fails */
-    adi_uart_Write(hDevOutput, str, strlen(str), false, &pUartHwError);
+    adi_uart_Write(hDevOutput, str, len, false, &pUartHwError);
 
 }
 #endif
