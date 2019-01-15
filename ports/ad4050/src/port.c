@@ -208,15 +208,15 @@ void init_ad4050(){
     // adi_uart_EnableAutobaud(hDevOutput, false, ADI_UART_AUTOBAUD_NO_ERROR);
 
     // Printout for Debug
-    char welcomeMsg[] = "\n\r\n\r\n\r*******************\n\r***** STARTUP *****\n\r*******************\n\rUart Enabled...\n\r";
-    adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+    // char welcomeMsg[] = "\n\r\n\r\n\r*******************\n\r***** STARTUP *****\n\r*******************\n\rUart Enabled...\n\r";
+    // adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
 
     
 
 }
 
 void sendTestString(){
-    char welcomeMsg[] = "Uart Testing...\n\r";
+    // char welcomeMsg[] = "Uart Testing...\n\r";
     // while(true){
     //     for (volatile uint32_t i = 0; i < 1000000; i++){};
     //     adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
