@@ -166,44 +166,29 @@ void init_ad4050(){
         return 1;
     }
 
-
-
-
-    /* Initialize GPIO driver */
+    // Initialize GPIO driver
     eGpioResult= adi_gpio_Init(gpioMemory, ADI_GPIO_MEMORY_SIZE);
     DEBUG_RESULT("adi_GPIO_Init failed.", eGpioResult, ADI_GPIO_SUCCESS);
-
-    /* Enable MSB output */
+    // Enable MSB output
     eGpioResult = adi_gpio_OutputEnable(MSB.Port, MSB.Pins, true);
     DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on MSB.", eGpioResult, ADI_GPIO_SUCCESS);
-
-    /* Enable LSB output */
+    // Enable LSB output
     eGpioResult = adi_gpio_OutputEnable(LSB.Port, LSB.Pins, true);
     DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on LSB.", eGpioResult, ADI_GPIO_SUCCESS);
 
 
-
-    char aDebugString[150u];
+    // Init our UART
+    // Clear Static Data Structures
     hDevOutput = NULL;
     ADI_ALIGNED_PRAGMA(4)
     #define UART0_TX_PORTP0_MUX (1u<<20)
     #define UART0_RX_PORTP0_MUX (1u<<22)
-
-    /* Set the pinmux for the UART */
+    // Set the pinmux for the UART
     *pREG_GPIO0_CFG |= UART0_TX_PORTP0_MUX | UART0_RX_PORTP0_MUX;
-
-    /* Open the UART device, data transfer is bidirectional with NORMAL mode by default */
+    // Open the UART device, data transfer is bidirectional with NORMAL mode by default
     adi_uart_Open(0u, ADI_UART_DIR_BIDIRECTION, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
-
     // Need to configure clock after Uart has been opened
     adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
-    // adi_uart_EnableAutobaud(hDevOutput, false, ADI_UART_AUTOBAUD_NO_ERROR);
-
-    // Printout for Debug
-    // char welcomeMsg[] = "\n\r\n\r\n\r*******************\n\r***** STARTUP *****\n\r*******************\n\rUart Enabled...\n\r";
-    // adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
-
-    
 
 }
 
