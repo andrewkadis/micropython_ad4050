@@ -1,7 +1,54 @@
+/*! *****************************************************************************
+ * @file    blinky_example.c
+ * @brief   Example showing how to use the GPIO driver to blink LEDs as outputs.
+ -----------------------------------------------------------------------------
+Copyright (c) 2017 Analog Devices, Inc.
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+  - Redistributions of source code must retain the above copyright notice,
+    this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright notice,
+    this list of conditions and the following disclaimer in the documentation
+    and/or other materials provided with the distribution.
+  - Modified versions of the software must be conspicuously marked as such.
+  - This software is licensed solely and exclusively for use with processors
+    manufactured by or for Analog Devices, Inc.
+  - This software may not be combined or merged with other code in any manner
+    that would cause the software to become subject to terms and conditions
+    which differ from those listed here.
+  - Neither the name of Analog Devices, Inc. nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+  - The use of this software may or may not infringe the patent rights of one
+    or more patent holders.  This license does not release you from the
+    requirement that you obtain separate licenses from these patent holders
+    to use this software.
+
+THIS SOFTWARE IS PROVIDED BY ANALOG DEVICES, INC. AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, NON-
+INFRINGEMENT, TITLE, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL ANALOG DEVICES, INC. OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, PUNITIVE OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, DAMAGES ARISING OUT OF
+CLAIMS OF INTELLECTUAL PROPERTY RIGHTS INFRINGEMENT; PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+*****************************************************************************/
+
+// Standard Library
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
+#include <common.h>
 
+// Micropython
 #include "py/compile.h"
 #include "py/runtime.h"
 #include "py/repl.h"
@@ -9,40 +56,89 @@
 #include "py/mperrno.h"
 #include "lib/utils/pyexec.h"
 
+// Analog Devices DFP 
+#include <adi_processor.h>
+#include <drivers/pwr/adi_pwr.h>
+#include <drivers/gpio/adi_gpio.h>
+#include <drivers/uart/adi_uart.h>
+#include <drivers/general/adi_drivers_general.h>
 
 
 
 
-#if MICROPY_ENABLE_COMPILER
-void do_str(const char *src, mp_parse_input_kind_t input_kind) {
-    nlr_buf_t nlr;
-    if (nlr_push(&nlr) == 0) {
-        mp_lexer_t *lex = mp_lexer_new_from_str_len(MP_QSTR__lt_stdin_gt_, src, strlen(src), 0);
-        qstr source_name = lex->source_name;
-        mp_parse_tree_t parse_tree = mp_parse(lex, input_kind);
-        mp_obj_t module_fun = mp_compile(&parse_tree, source_name, MP_EMIT_OPT_NONE, true);
-        mp_call_function_0(module_fun);
-        nlr_pop();
-    } else {
-        // uncaught exception
-        mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
-    }
-}
-#endif
+// typedef struct {
+//     ADI_GPIO_PORT Port;
+//     ADI_GPIO_DATA Pins;
+// } PinMap;
 
+
+// /* LED GPIO assignments */
+
+// #ifdef __EVCOG__
+// PinMap MSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_10};  /*   Red LED on GPIO42 (DS4) */
+// PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_2};   /* Green LED on GPIO34 (DS3) */
+// #else
+// PinMap MSB = {ADI_GPIO_PORT1, ADI_GPIO_PIN_15};  /*   Red LED on GPIO31 (DS4) */
+// PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_0};   /* Green LED on GPIO32 (DS3) */
+// #endif
+
+// Helper function to init the AD4050
+static void init_ad4050();
+static void sendTestString();
+
+// Static variables
 static char *stack_top;
-#if MICROPY_ENABLE_GC
-static char heap[2048];
-#endif
+// Uart
+static ADI_UART_CONST_HANDLE hDevOutput = NULL;
+uint32_t pUartHwError = NULL;
+// Uart Buffer
+static uint8_t OutDeviceMem[ADI_UART_BIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
+static char sendMe[] = "Hello, world!\n\r";
 
-int main(int argc, char **argv) {
+// LED GPIOs
+static uint8_t gpioMemory[ADI_GPIO_MEMORY_SIZE] = {0};
+static ADI_GPIO_RESULT eGpioResult = 0;
+typedef struct {
+    ADI_GPIO_PORT Port;
+    ADI_GPIO_DATA Pins;
+} PinMap;
+static PinMap MSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_10};  /*   Red LED on GPIO42 (DS4) */
+static PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_2};   /* Green LED on GPIO34 (DS3) */
+
+
+
+
+int main(void)
+{
+
+    // Init Code
+    init_ad4050();
+
+    // Print for Debug
+    sendTestString();
+
+    // Run Micropython
     int stack_dummy;
     stack_top = (char*)&stack_dummy;
 
-    #if MICROPY_ENABLE_GC
-    gc_init(heap, heap + sizeof(heap));
-    #endif
+    // #if MICROPY_ENABLE_GC
+    // gc_init(heap, heap + sizeof(heap));
+    // #endif
+
+     eGpioResult = adi_gpio_SetHigh (MSB.Port, MSB.Pins);
+    DEBUG_RESULT("adi_gpio_SetHigh (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
+    eGpioResult = adi_gpio_SetHigh(LSB.Port,  LSB.Pins);
+    DEBUG_RESULT("adi_gpio_SetHigh (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
+    // eGpioResult = adi_gpio_SetLow (MSB.Port, MSB.Pins);
+    // DEBUG_RESULT("adi_gpio_SetLow (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
+    // eGpioResult = adi_gpio_SetLow(LSB.Port,  LSB.Pins);
+    // DEBUG_RESULT("adi_gpio_SetLow (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
+
     mp_init();
+
     #if MICROPY_ENABLE_COMPILER
     #if MICROPY_REPL_EVENT_DRIVEN
     pyexec_event_repl_init();
@@ -60,18 +156,78 @@ int main(int argc, char **argv) {
     #else
     pyexec_frozen_module("frozentest.py");
     #endif
+    
     mp_deinit();
+
+    
     return 0;
 }
 
-void gc_collect(void) {
-    // WARNING: This gc_collect implementation doesn't try to get root
-    // pointers from CPU registers, and thus may function incorrectly.
-    void *dummy;
-    gc_collect_start();
-    gc_collect_root(&dummy, ((mp_uint_t)stack_top - (mp_uint_t)&dummy) / sizeof(mp_uint_t));
-    gc_collect_end();
-    gc_dump_info();
+void init_ad4050(){
+
+
+
+    /* Initialize the power service */
+    if (ADI_PWR_SUCCESS != adi_pwr_Init())
+    {
+        return 1;
+    }
+    if (ADI_PWR_SUCCESS != adi_pwr_SetClockDivider(ADI_CLOCK_HCLK,1))
+    {
+        return 1;
+    }
+    if (ADI_PWR_SUCCESS != adi_pwr_SetClockDivider(ADI_CLOCK_PCLK,1))
+    {
+        return 1;
+    }
+
+
+
+
+    /* Initialize GPIO driver */
+    eGpioResult= adi_gpio_Init(gpioMemory, ADI_GPIO_MEMORY_SIZE);
+    DEBUG_RESULT("adi_GPIO_Init failed.", eGpioResult, ADI_GPIO_SUCCESS);
+
+    /* Enable MSB output */
+    eGpioResult = adi_gpio_OutputEnable(MSB.Port, MSB.Pins, true);
+    DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on MSB.", eGpioResult, ADI_GPIO_SUCCESS);
+
+    /* Enable LSB output */
+    eGpioResult = adi_gpio_OutputEnable(LSB.Port, LSB.Pins, true);
+    DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on LSB.", eGpioResult, ADI_GPIO_SUCCESS);
+
+
+
+    char aDebugString[150u];
+    hDevOutput = NULL;
+    ADI_ALIGNED_PRAGMA(4)
+    #define UART0_TX_PORTP0_MUX (1u<<20)
+    #define UART0_RX_PORTP0_MUX (1u<<22)
+
+    /* Set the pinmux for the UART */
+    *pREG_GPIO0_CFG |= UART0_TX_PORTP0_MUX | UART0_RX_PORTP0_MUX;
+
+    /* Open the UART device, data transfer is bidirectional with NORMAL mode by default */
+    adi_uart_Open(0u, ADI_UART_DIR_BIDIRECTION, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
+
+    // Need to configure clock after Uart has been opened
+    adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
+    // adi_uart_EnableAutobaud(hDevOutput, false, ADI_UART_AUTOBAUD_NO_ERROR);
+
+    // Printout for Debug
+    // char welcomeMsg[] = "\n\r\n\r\n\r*******************\n\r***** STARTUP *****\n\r*******************\n\rUart Enabled...\n\r";
+    // adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+
+    
+
+}
+
+void sendTestString(){
+    // char welcomeMsg[] = "Uart Testing...\n\r";
+    // while(true){
+    //     for (volatile uint32_t i = 0; i < 1000000; i++){};
+    //     adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
+    // }
 }
 
 mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
@@ -87,7 +243,10 @@ mp_obj_t mp_builtin_open(size_t n_args, const mp_obj_t *args, mp_map_t *kwargs) 
 }
 MP_DEFINE_CONST_FUN_OBJ_KW(mp_builtin_open_obj, 1, mp_builtin_open);
 
-void nlr_jump_fail(void *val) {
+// This must be implemented by a port.  It's called by nlr_jump
+// if no nlr buf has been pushed.  It must not return, but rather
+// should bail out with a fatal error.
+NORETURN void nlr_jump_fail(void *val){
     while (1);
 }
 
@@ -102,162 +261,73 @@ void MP_WEAK __assert_func(const char *file, int line, const char *func, const c
 }
 #endif
 
-#if MICROPY_MIN_USE_CORTEX_CPU
 
-// this is a minimal IRQ and reset framework for any Cortex-M CPU
 
-extern uint32_t _estack, _sidata, _sdata, _edata, _sbss, _ebss;
 
-void Reset_Handler(void) __attribute__((naked));
-void Reset_Handler(void) {
-    // set stack pointer
-    __asm volatile ("ldr sp, =_estack");
-    // copy .data section from flash to RAM
-    for (uint32_t *src = &_sidata, *dest = &_sdata; dest < &_edata;) {
-        *dest++ = *src++;
-    }
-    // zero out .bss section
-    for (uint32_t *dest = &_sbss; dest < &_ebss;) {
-        *dest++ = 0;
-    }
-    // jump to board initialisation
-    void _start(void);
-    _start();
+
+
+
+// HAL Functions, overwrite these
+#ifndef mp_hal_stdin_rx_chr
+int mp_hal_stdin_rx_chr(void){
+
+    /* Ignore return codes since there's nothing we can do if it fails */
+    int recv_char = 0;
+    adi_uart_Read(hDevOutput, &recv_char, 1, 0, &pUartHwError);
+    return recv_char;
+
 }
-
-void Default_Handler(void) {
-    for (;;) {
-    }
-}
-
-const uint32_t isr_vector[] __attribute__((section(".isr_vector"))) = {
-    (uint32_t)&_estack,
-    (uint32_t)&Reset_Handler,
-    (uint32_t)&Default_Handler, // NMI_Handler
-    (uint32_t)&Default_Handler, // HardFault_Handler
-    (uint32_t)&Default_Handler, // MemManage_Handler
-    (uint32_t)&Default_Handler, // BusFault_Handler
-    (uint32_t)&Default_Handler, // UsageFault_Handler
-    0,
-    0,
-    0,
-    0,
-    (uint32_t)&Default_Handler, // SVC_Handler
-    (uint32_t)&Default_Handler, // DebugMon_Handler
-    0,
-    (uint32_t)&Default_Handler, // PendSV_Handler
-    (uint32_t)&Default_Handler, // SysTick_Handler
-};
-
-void _start(void) {
-    // when we get here: stack is initialised, bss is clear, data is copied
-
-    // SCB->CCR: enable 8-byte stack alignment for IRQ handlers, in accord with EABI
-    *((volatile uint32_t*)0xe000ed14) |= 1 << 9;
-
-    // initialise the cpu and peripherals
-    #if MICROPY_MIN_USE_STM32_MCU
-    void stm32_init(void);
-    stm32_init();
-    #endif
-
-    // now that we have a basic system up and running we can call main
-    main(0, NULL);
-
-    // we must not return
-    for (;;) {
-    }
-}
-
 #endif
 
-#if MICROPY_MIN_USE_AD4050_MCU
+#ifndef mp_hal_stdout_tx_strn
+void mp_hal_stdout_tx_strn(const char *str, size_t len){
 
-// this is minimal set-up code for an STM32 MCU
+    // Are we receiving a special character?
+    char firstChar = *str;
+    if( firstChar=='\b' ){
 
-typedef struct {
-    volatile uint32_t CR;
-    volatile uint32_t PLLCFGR;
-    volatile uint32_t CFGR;
-    volatile uint32_t CIR;
-    uint32_t _1[8];
-    volatile uint32_t AHB1ENR;
-    volatile uint32_t AHB2ENR;
-    volatile uint32_t AHB3ENR;
-    uint32_t _2;
-    volatile uint32_t APB1ENR;
-    volatile uint32_t APB2ENR;
-} periph_rcc_t;
+        // Micropythonn is sending us spacing characters so print them
+        // adi_uart_Write(hDevOutput, str, 1, false, &pUartHwError);
+        char tx_me = 0x20;
+        adi_uart_Write(hDevOutput, tx_me, 1, false, &pUartHwError);
 
-typedef struct {
-    volatile uint32_t MODER;
-    volatile uint32_t OTYPER;
-    volatile uint32_t OSPEEDR;
-    volatile uint32_t PUPDR;
-    volatile uint32_t IDR;
-    volatile uint32_t ODR;
-    volatile uint16_t BSRRL;
-    volatile uint16_t BSRRH;
-    volatile uint32_t LCKR;
-    volatile uint32_t AFR[2];
-} periph_gpio_t;
+    }else{
 
-typedef struct {
-    volatile uint32_t SR;
-    volatile uint32_t DR;
-    volatile uint32_t BRR;
-    volatile uint32_t CR1;
-} periph_uart_t;
+        // Not receiving a special character, print out what we received
+        adi_uart_Write(hDevOutput, str, len, false, &pUartHwError);
 
-#define USART1 ((periph_uart_t*) 0x40011000)
-#define GPIOA  ((periph_gpio_t*) 0x40020000)
-#define GPIOB  ((periph_gpio_t*) 0x40020400)
-#define RCC    ((periph_rcc_t*)  0x40023800)
+    }
 
-// simple GPIO interface
-#define GPIO_MODE_IN (0)
-#define GPIO_MODE_OUT (1)
-#define GPIO_MODE_ALT (2)
-#define GPIO_PULL_NONE (0)
-#define GPIO_PULL_UP (0)
-#define GPIO_PULL_DOWN (1)
-void gpio_init(periph_gpio_t *gpio, int pin, int mode, int pull, int alt) {
-    gpio->MODER = (gpio->MODER & ~(3 << (2 * pin))) | (mode << (2 * pin));
-    // OTYPER is left as default push-pull
-    // OSPEEDR is left as default low speed
-    gpio->PUPDR = (gpio->PUPDR & ~(3 << (2 * pin))) | (pull << (2 * pin));
-    gpio->AFR[pin >> 3] = (gpio->AFR[pin >> 3] & ~(15 << (4 * (pin & 7)))) | (alt << (4 * (pin & 7)));
 }
-#define gpio_get(gpio, pin) ((gpio->IDR >> (pin)) & 1)
-#define gpio_set(gpio, pin, value) do { gpio->ODR = (gpio->ODR & ~(1 << (pin))) | (value << pin); } while (0)
-#define gpio_low(gpio, pin) do { gpio->BSRRH = (1 << (pin)); } while (0)
-#define gpio_high(gpio, pin) do { gpio->BSRRL = (1 << (pin)); } while (0)
-
-void stm32_init(void) {
-    // basic MCU config
-    RCC->CR |= (uint32_t)0x00000001; // set HSION
-    RCC->CFGR = 0x00000000; // reset all
-    RCC->CR &= (uint32_t)0xfef6ffff; // reset HSEON, CSSON, PLLON
-    RCC->PLLCFGR = 0x24003010; // reset PLLCFGR
-    RCC->CR &= (uint32_t)0xfffbffff; // reset HSEBYP
-    RCC->CIR = 0x00000000; // disable IRQs
-
-    // leave the clock as-is (internal 16MHz)
-
-    // enable GPIO clocks
-    RCC->AHB1ENR |= 0x00000003; // GPIOAEN, GPIOBEN
-
-    // turn on an LED! (on pyboard it's the red one)
-    gpio_init(GPIOA, 13, GPIO_MODE_OUT, GPIO_PULL_NONE, 0);
-    gpio_high(GPIOA, 13);
-
-    // enable UART1 at 9600 baud (TX=B6, RX=B7)
-    gpio_init(GPIOB, 6, GPIO_MODE_ALT, GPIO_PULL_NONE, 7);
-    gpio_init(GPIOB, 7, GPIO_MODE_ALT, GPIO_PULL_NONE, 7);
-    RCC->APB2ENR |= 0x00000010; // USART1EN
-    USART1->BRR = (104 << 4) | 3; // 16MHz/(16*104.1875) = 9598 baud
-    USART1->CR1 = 0x0000200c; // USART enable, tx enable, rx enable
-}
-
 #endif
 
+// The following functions should 
+#ifndef mp_hal_delay_ms
+void mp_hal_delay_ms(mp_uint_t ms);
+#endif
+
+#ifndef mp_hal_delay_us
+void mp_hal_delay_us(mp_uint_t us);
+#endif
+
+#ifndef mp_hal_ticks_ms
+mp_uint_t mp_hal_ticks_ms(void);
+#endif
+
+#ifndef mp_hal_ticks_us
+mp_uint_t mp_hal_ticks_us(void);
+#endif
+
+#ifndef mp_hal_ticks_cpu
+mp_uint_t mp_hal_ticks_cpu(void);
+#endif
+
+// If port HAL didn't define its own pin API, use generic
+// "virtual pin" API from the core.
+#ifndef mp_hal_pin_obj_t
+#define mp_hal_pin_obj_t mp_obj_t
+#define mp_hal_get_pin_obj(pin) (pin)
+#define mp_hal_pin_read(pin) mp_virtual_pin_read(pin)
+#define mp_hal_pin_write(pin, v) mp_virtual_pin_write(pin, v)
+#include "extmod/virtpin.h"
+#endif

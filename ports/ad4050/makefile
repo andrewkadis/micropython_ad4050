@@ -85,7 +85,7 @@ export LIBS = $(LIBRARIES)
 ##########################################################################
 
 # Executable Name
-EXE := port
+EXE := micropython
 
 # All Target
 all: dir DFP mpy sys src exe
@@ -1127,7 +1127,7 @@ SRC_OBJS = $(SRC_BIN)/$(EXE).o  $(SRC_BIN)/PinMux.o
 src: $(SRC_OBJS)
 
 # Executable
-$(SRC_BIN)/$(EXE).o: ./src/$(EXE).c
+$(SRC_BIN)/$(EXE).o: ./src/main.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
@@ -1141,32 +1141,6 @@ $(SRC_BIN)/PinMux.o: ./src/PinMux.c
 	$(CC) $(CFLAGS) -o  "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
-
-
-
-##########################################################################
-############################ Source Files ################################
-##########################################################################
-
-# # Source Files - call whatever we've written
-# # main.o = main.o  $(SRC_BIN)/PinMux.o
-# python: main.o
-
-# # Executable
-# main.o: ./src/main.c
-# 	@echo 'Building file: $<'
-# 	@echo 'Invoking: ARM GCC Compiler'
-# 	$(CC) $(CFLAGS) -o  "$@" "$<"
-# 	@echo 'Finished building: $<'
-# 	@echo ' '
-
-# # Other src files...
-# $(SRC_BIN)/PinMux.o: ./src/PinMux.c
-# 	@echo 'Building file: $<'
-# 	@echo 'Invoking: ARM GCC Compiler'
-# 	$(CC) $(CFLAGS) -o  "$@" "$<"
-# 	@echo 'Finished building: $<'
-# 	@echo ' '
 
 
 
