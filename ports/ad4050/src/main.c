@@ -225,7 +225,14 @@ uint32_t init_ad4050(){
     // Open the UART device, data transfer is bidirectional with NORMAL mode by default
     adi_uart_Open(0u, ADI_UART_DIR_BIDIRECTION, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
     // Need to configure clock after Uart has been opened
-    adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
+    // Corresponds to 9600, taken from Table 17-2, pg. 17-4 in Ref Manual
+    // Full name is "ADuCM4050 Ultra Low Power ARM Cortex-M4F MCU with Integrated Power Management Hardware Reference, Revision 1.1, November 2018"
+    const uint16_t nDivC = 28;
+    const uint8_t  nDivM = 3;
+    const uint16_t nDivN = 46;
+    const uint8_t  nOSR  = 3;
+    adi_uart_ConfigBaudRate(hDevOutput, nDivC, nDivM, nDivN, nOSR);
+
 
     return 0;
 
