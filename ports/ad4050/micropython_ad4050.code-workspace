@@ -12,7 +12,8 @@
 	],
 	"settings": {
 		"files.associations": {
-			"sstream": "c"
+			"sstream": "c",
+			"port.h": "c"
 		}
 	}
 }
