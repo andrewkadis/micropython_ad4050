@@ -66,24 +66,10 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 
-// typedef struct {
-//     ADI_GPIO_PORT Port;
-//     ADI_GPIO_DATA Pins;
-// } PinMap;
-
-
-// /* LED GPIO assignments */
-
-// #ifdef __EVCOG__
-// PinMap MSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_10};  /*   Red LED on GPIO42 (DS4) */
-// PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_2};   /* Green LED on GPIO34 (DS3) */
-// #else
-// PinMap MSB = {ADI_GPIO_PORT1, ADI_GPIO_PIN_15};  /*   Red LED on GPIO31 (DS4) */
-// PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_0};   /* Green LED on GPIO32 (DS3) */
-// #endif
 
 // Helper function to init the AD4050
 static void init_ad4050();
+// For debugging, used extensively befor debugger was in place
 static void sendTestString();
 
 // Static variables
@@ -107,10 +93,12 @@ static PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_2};   /* Green LED on GPIO34 (
 
 
 
+
+// Main Function
 int main(void)
 {
 
-    // Init Code
+    // Init Code for AD4050 taken from Analog Device's DFP
     init_ad4050();
 
     // Print for Debug
@@ -120,24 +108,22 @@ int main(void)
     int stack_dummy;
     stack_top = (char*)&stack_dummy;
 
-    // #if MICROPY_ENABLE_GC
-    // gc_init(heap, heap + sizeof(heap));
-    // #endif
+    // Port does not currently suppoty Micropython garbage collection
+    #if MICROPY_ENABLE_GC
+    gc_init(heap, heap + sizeof(heap));
+    #endif
 
-     eGpioResult = adi_gpio_SetHigh (MSB.Port, MSB.Pins);
+    // Toggle the GPIOs at startup to see if we are alive
+    eGpioResult = adi_gpio_SetHigh (MSB.Port, MSB.Pins);
     DEBUG_RESULT("adi_gpio_SetHigh (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
     eGpioResult = adi_gpio_SetHigh(LSB.Port,  LSB.Pins);
     DEBUG_RESULT("adi_gpio_SetHigh (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
 
-    // eGpioResult = adi_gpio_SetLow (MSB.Port, MSB.Pins);
-    // DEBUG_RESULT("adi_gpio_SetLow (MSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
-    // eGpioResult = adi_gpio_SetLow(LSB.Port,  LSB.Pins);
-    // DEBUG_RESULT("adi_gpio_SetLow (LSB).", eGpioResult, ADI_GPIO_SUCCESS);
-
+    // Command to Init Micropython
     mp_init();
 
+    // Micropython event loop is taken directly from Micropython
+    // MACRO structure is a bit convoluted but hesitatnt to modify it
     #if MICROPY_ENABLE_COMPILER
     #if MICROPY_REPL_EVENT_DRIVEN
     pyexec_event_repl_init();
@@ -150,17 +136,17 @@ int main(void)
     #else
     pyexec_friendly_repl();
     #endif
-    //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
-    //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
     #else
     pyexec_frozen_module("frozentest.py");
     #endif
     
+    // Command to stop Micropython, typically called after exited with CTRL+D
     mp_deinit();
-
     
     return 0;
 }
+
+
 
 void init_ad4050(){
 
