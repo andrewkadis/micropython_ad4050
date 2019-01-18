@@ -88,13 +88,12 @@ static void sendTestString();
 
 // Static variables
 static char *stack_top;
-// Uart
+// Uart Stuctures
 static ADI_UART_CONST_HANDLE hDevOutput = NULL;
 uint32_t pUartHwError = NULL;
 // Uart Buffer
 static uint8_t OutDeviceMem[ADI_UART_BIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
 static char sendMe[] = "Hello, world!\n\r";
-
 // LED GPIOs
 static uint8_t gpioMemory[ADI_GPIO_MEMORY_SIZE] = {0};
 static ADI_GPIO_RESULT eGpioResult = 0;
