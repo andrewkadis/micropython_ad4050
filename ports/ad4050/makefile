@@ -1,6 +1,6 @@
 ################################################################################
 # A. Kadis, Uni of Cambridge Physical Computation Lab 28th December 2018
-# Based on a makefile auto-genreated from CrossCOre originally but now heavily modified
+# Based on a makefile auto-generated from CrossCOre originally but now heavily modified
 ################################################################################
 
 ###########################################################################
