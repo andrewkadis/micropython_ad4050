@@ -70,16 +70,18 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 // Helper function to init the AD4050 taken from Analog Device's DFP
-static void init_ad4050();
+static uint32_t init_ad4050();
 
 // Static variables
 static char *stack_top;
-// Uart Stuctures
+// Uart Stuctures and definitions
+ADI_ALIGNED_PRAGMA(4)
+#define UART0_TX_PORTP0_MUX (1u<<20)
+#define UART0_RX_PORTP0_MUX (1u<<22)
 static ADI_UART_CONST_HANDLE hDevOutput = NULL;
 uint32_t pUartHwError = NULL;
 // Uart Buffer
 static uint8_t OutDeviceMem[ADI_UART_BIDIR_MEMORY_SIZE] ADI_ALIGNED_ATTRIBUTE(4);
-static char sendMe[] = "Hello, world!\n\r";
 // LED GPIOs
 static uint8_t gpioMemory[ADI_GPIO_MEMORY_SIZE] = {0};
 static ADI_GPIO_RESULT eGpioResult = 0;
@@ -140,7 +142,6 @@ int main(void)
     // Command to stop Micropython, typically called after exited with CTRL+D
     mp_deinit();
     
-    return 0;
 }
 
 
@@ -148,7 +149,7 @@ int main(void)
 
 
 // Helper function to init the AD4050 taken from Analog Device's DFP
-void init_ad4050(){
+uint32_t init_ad4050(){
 
     // Initialize the power service
     if (ADI_PWR_SUCCESS != adi_pwr_Init())
@@ -174,19 +175,17 @@ void init_ad4050(){
     eGpioResult = adi_gpio_OutputEnable(LSB.Port, LSB.Pins, true);
     DEBUG_RESULT("adi_GPIO_SetOutputEnable failed on LSB.", eGpioResult, ADI_GPIO_SUCCESS);
 
-
     // Init our UART
     // Clear Static Data Structures
     hDevOutput = NULL;
-    ADI_ALIGNED_PRAGMA(4)
-    #define UART0_TX_PORTP0_MUX (1u<<20)
-    #define UART0_RX_PORTP0_MUX (1u<<22)
     // Set the pinmux for the UART
     *pREG_GPIO0_CFG |= UART0_TX_PORTP0_MUX | UART0_RX_PORTP0_MUX;
     // Open the UART device, data transfer is bidirectional with NORMAL mode by default
     adi_uart_Open(0u, ADI_UART_DIR_BIDIRECTION, OutDeviceMem, sizeof OutDeviceMem, &hDevOutput);
     // Need to configure clock after Uart has been opened
     adi_uart_ConfigBaudRate(hDevOutput, 3, 2, 719, 3);// Corresponds to 115200, taken from Table 17-2, pg. 17-4 in Ref Manual
+
+    return 0;
 
 }
 
