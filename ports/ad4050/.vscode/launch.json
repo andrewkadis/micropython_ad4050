@@ -10,7 +10,7 @@
             "request": "launch",
             "servertype": "jlink",
             "cwd": "${workspaceRoot}",
-            "executable": "./bin/port.elf",
+            "executable": "./bin/micropython.elf",
             "name": "AD4050LZ Debug",
             "device": "ADUCM4050",
             "interface": "swd",

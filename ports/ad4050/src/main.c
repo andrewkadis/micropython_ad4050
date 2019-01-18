@@ -101,9 +101,6 @@ int main(void)
     // Init Code for AD4050 taken from Analog Device's DFP
     init_ad4050();
 
-    // Print for Debug
-    sendTestString();
-
     // Run Micropython
     int stack_dummy;
     stack_top = (char*)&stack_dummy;
