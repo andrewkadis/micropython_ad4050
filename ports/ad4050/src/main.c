@@ -1,3 +1,5 @@
+// Based on Code from Analog Devices and Micropython
+
 /*! *****************************************************************************
  * @file    blinky_example.c
  * @brief   Example showing how to use the GPIO driver to blink LEDs as outputs.
@@ -67,10 +69,8 @@ POSSIBILITY OF SUCH DAMAGE.
 
 
 
-// Helper function to init the AD4050
+// Helper function to init the AD4050 taken from Analog Device's DFP
 static void init_ad4050();
-// For debugging, used extensively befor debugger was in place
-static void sendTestString();
 
 // Static variables
 static char *stack_top;
@@ -148,11 +148,12 @@ int main(void)
 
 
 
+
+
+// Helper function to init the AD4050 taken from Analog Device's DFP
 void init_ad4050(){
 
-
-
-    /* Initialize the power service */
+    // Initialize the power service
     if (ADI_PWR_SUCCESS != adi_pwr_Init())
     {
         return 1;
@@ -192,13 +193,8 @@ void init_ad4050(){
 
 }
 
-void sendTestString(){
-    // char welcomeMsg[] = "Uart Testing...\n\r";
-    // while(true){
-    //     for (volatile uint32_t i = 0; i < 1000000; i++){};
-    //     adi_uart_Write(hDevOutput, welcomeMsg, strlen(welcomeMsg), false, &pUartHwError);
-    // }
-}
+
+
 
 mp_lexer_t *mp_lexer_new_from_file(const char *filename) {
     mp_raise_OSError(MP_ENOENT);
@@ -235,9 +231,18 @@ void MP_WEAK __assert_func(const char *file, int line, const char *func, const c
 
 
 
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////// HAL HOOKS ////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 
+// These HAL functions are provided by Micropython as a the means by which micropython
+// should be connected up the target microcontroller's driver layer (the DFP for Analog Devices)
+// They should be overwritten with the appropriate calls to the DFP as required
 
-// HAL Functions, overwrite these
+// As the port continues to mature and further extensibility is added, further HAL functions shall be placed here
+// The full extent of this can be seen in the main STM32 pyboard port
+
+// Received a UART character on the REPL
 #ifndef mp_hal_stdin_rx_chr
 int mp_hal_stdin_rx_chr(void){
 
@@ -249,6 +254,7 @@ int mp_hal_stdin_rx_chr(void){
 }
 #endif
 
+// Transmite a UART character on the REPL
 #ifndef mp_hal_stdout_tx_strn
 void mp_hal_stdout_tx_strn(const char *str, size_t len){
 
@@ -271,7 +277,7 @@ void mp_hal_stdout_tx_strn(const char *str, size_t len){
 }
 #endif
 
-// The following functions should 
+// Haven't modified the timer and delay functions, default behaviour is do-nothing
 #ifndef mp_hal_delay_ms
 void mp_hal_delay_ms(mp_uint_t ms);
 #endif
