@@ -26,7 +26,7 @@ include $(MICROPYTHON_ROOT)/py/py.mk
 # Naughty, naughty, Analog Devices, really shouldn't be shipping your code with these warnings in them
 DISABLED_WARNINGS=-Wno-format-overflow -Wno-comment -Wno-int-conversion -Wno-incompatible-pointer-types -Wno-discarded-qualifiers -Wno-int-conversion
 # Set our compilation Flags here for all included libraries + source files
-CFLAGS=-Wall $(DISABLED_WARNINGS) -g -O0 -g -gdwarf-2 -ffunction-sections -fdata-sections -DCORE0 -D_DEBUG -D__EVCOG__ -D_RTE_ -D__ADUCM4050__ -D__SILICON_REVISION__=0xffff $(INCLUDE_PATH) -Wall -c -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" 
+CFLAGS=-std=c99 -Wall $(DISABLED_WARNINGS) -g -O0 -g -gdwarf-2 -ffunction-sections -fdata-sections -DCORE0 -D_DEBUG -D__EVCOG__ -D_RTE_ -D__ADUCM4050__ -D__SILICON_REVISION__=0xffff $(INCLUDE_PATH) -Wall -c -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" 
 
 
 
