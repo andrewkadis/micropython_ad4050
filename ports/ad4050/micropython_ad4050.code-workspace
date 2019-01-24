@@ -13,7 +13,8 @@
 	"settings": {
 		"files.associations": {
 			"sstream": "c",
-			"port.h": "c"
+			"port.h": "c",
+			"adi_drivers_general.h": "c"
 		}
 	}
 }
