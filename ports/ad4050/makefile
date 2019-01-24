@@ -18,8 +18,11 @@ ANALOG_DEVICES_ROOT = ../../lib/ADuCM4x50_DFP/AnalogDevices
 ARM_CMSIS_ROOT      = ../../lib/ADuCM4x50_DFP/ARM/
 # Micropython Root Directory
 MICROPYTHON_ROOT    = ../..
-# include py core make definitions
+# Include py core make definitions
 include $(MICROPYTHON_ROOT)/py/py.mk
+# Directories for frozen modules (python scripts) and frozen bytecode modules (bytecode) 
+FROZEN_DIR = scripts
+FROZEN_MPY_DIR = modules
 
 
 # Overwritten Warnings - disabled these in the compiler so don't get warnings at runtime.
@@ -103,6 +106,10 @@ dir:
 	mkdir -p $(SYS_BIN)
 	mkdir -p $(SRC_BIN)
 
+
+frozen_mpy.c: frozentest.mpy ../../mpy-cross/build/genhdr/qstrdefs.generated.h
+	$(ECHO) "MISC freezing bytecode"
+	../../tools/mpy-tool.py -f -q ../../mpy-cross/build/genhdr/qstrdefs.generated.h -mlongint-impl=none $< > $@
 
 
 ##########################################################################
