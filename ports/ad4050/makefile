@@ -91,18 +91,20 @@ export LIBS = $(LIBRARIES)
 EXE := micropython
 
 # All Target
-all: dir DFP mpy sys src exe
+all: dir DFP mpy mod sys src exe
 
 # Directories to put generated files into
 BIN     = ./bin
 DFP_BIN = $(BIN)/dfp
 MPY_BIN = $(BIN)/mpy
+MOD_BIN = $(BIN)/mod
 SYS_BIN = $(BIN)/sys
 SRC_BIN = $(BIN)/src
 dir: 
 	mkdir -p $(BIN)
 	mkdir -p $(DFP_BIN)
 	mkdir -p $(MPY_BIN)
+	mkdir -p $(MOD_BIN)
 	mkdir -p $(SYS_BIN)
 	mkdir -p $(SRC_BIN)
 	mkdir -p bin/genhdr
@@ -1109,17 +1111,27 @@ bin/mpy/readline.o : ../../lib/mp-readline/readline.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
+
+
+##########################################################################
+####################### Frozen Python Modules ############################
+##########################################################################
+
+# System Files - Example have these separate to the DFP so we maintain this separation here
+MOD_OBJS = $(MOD_BIN)/_frozen_mpy.o
+mod: $(MOD_OBJS)
+
 # Generating the Frozen Modules requires extra pre-processing of quadstrings
-$(SRC_BIN)/_frozen_mpy.o: ./src/_frozen_mpy.c
+$(MOD_BIN)/_frozen_mpy.o: modules/frozentest.py
 	@echo 'Generating qstrings...'
 	cat ../../py/qstrdefs.h qstrdefsport.h ../../mpy-cross/build/genhdr/qstrdefs.collected.h | sed 's/^Q(.*)/"&"/' | arm-none-eabi-gcc -E -I. -I../.. -Ibuild -Wall -Werror -std=c99 -nostdlib -mthumb -mtune=cortex-m4 -mabi=aapcs-linux -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -fsingle-precision-constant -Wdouble-promotion  -Os -DNDEBUG -fdata-sections -ffunction-sections - | sed 's/^"\(Q(.*)\)"/\1/' > bin/genhdr/qstrdefs.preprocessed.h
 	python ../../py/makeqstrdata.py bin/genhdr/qstrdefs.preprocessed.h > bin/genhdr/qstrdefs.generated.h
 	@echo 'Generating Python Bytecode'
-	../../mpy-cross/mpy-cross -X heapsize=4000 frozentest.py -o frozentest.mpy
-	../../tools/mpy-tool.py -f -q bin/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none frozentest.mpy > src/_frozen_mpy.c
+	../../mpy-cross/mpy-cross -X heapsize=4000 modules/frozentest.py -o $(MOD_BIN)/frozentest.mpy
+	../../tools/mpy-tool.py -f -q bin/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $(MOD_BIN)/frozentest.mpy > $(MOD_BIN)/_frozen_mpy.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
-	$(CC) $(CFLAGS) -o  "$@" "$<"
+	$(CC) $(CFLAGS) -o  "$@" $(MOD_BIN)/_frozen_mpy.c
 	@echo 'Finished building: $<'
 	@echo ' '
 
@@ -1148,19 +1160,11 @@ bin/sys/adi_initialize.o : ./sys/adi_initialize.c
 ##########################################################################
 
 # Source Files - call whatever we've written
-SRC_OBJS = $(SRC_BIN)/$(EXE).o  $(SRC_BIN)/PinMux.o $(SRC_BIN)/_frozen_mpy.o
+SRC_OBJS = $(SRC_BIN)/$(EXE).o  $(SRC_BIN)/PinMux.o
 src: $(SRC_OBJS)
 
 # Executable
 $(SRC_BIN)/$(EXE).o: ./src/main.c
-	@echo 'Building file: $<'
-	@echo 'Invoking: ARM GCC Compiler'
-	$(CC) $(CFLAGS) -o  "$@" "$<"
-	@echo 'Finished building: $<'
-	@echo ' '
-
-# Other src files...
-$(SRC_BIN)/PinMux.o: ./src/PinMux.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" "$<"
@@ -1185,7 +1189,7 @@ $(SRC_BIN)/PinMux.o: ./src/PinMux.c
 exe: $(USER_OBJS) $(SRC_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: ARM GCC Linker'
-	arm-none-eabi-gcc -T$(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Source/GCC/ADuCM4050.ld -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -o  '$(BIN)/$(EXE).elf' -Xlinker -Map='$(BIN)/$(EXE).map' $(DRIVER_OBJS) $(MPY_OBJS) $(STARTUP_OBJS) $(SYS_OBJS) $(SRC_OBJS) $(LIBS) 
+	arm-none-eabi-gcc -T$(ANALOG_DEVICES_ROOT)/ADuCM4x50_DFP/3.2.0/Source/GCC/ADuCM4050.ld -Wl,--gc-sections -mcpu=cortex-m4 -mthumb -mfpu=fpv4-sp-d16 -mfloat-abi=hard -o  '$(BIN)/$(EXE).elf' -Xlinker -Map='$(BIN)/$(EXE).map' $(DRIVER_OBJS) $(MPY_OBJS) $(MOD_OBJS) $(STARTUP_OBJS) $(SYS_OBJS) $(SRC_OBJS) $(LIBS) 
 	# Generate srec, bin and hex formats
 	arm-none-eabi-objcopy -Osrec '$(BIN)/$(EXE).elf' '$(BIN)/$(EXE).srec'
 	arm-none-eabi-objcopy -Oihex '$(BIN)/$(EXE).elf' '$(BIN)/$(EXE).hex'

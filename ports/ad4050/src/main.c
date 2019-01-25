@@ -178,7 +178,7 @@ int main(void)
     pyexec_friendly_repl();
     #endif
     #else
-    pyexec_frozen_module("frozentest.py");
+    pyexec_frozen_module("modules/frozentest.py");
     #endif
     
     // Command to stop Micropython, typically called after exited with CTRL+D
