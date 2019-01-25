@@ -1,4 +1,3 @@
-# INSERT PYTHON CODE TO EXECUTE HERE!!!
 print('uPy')
 print('a long string that is not interned')
 print('a string that has unicode αβγ chars')
