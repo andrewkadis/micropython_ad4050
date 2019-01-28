@@ -28,18 +28,39 @@ def run_basicmath_small():
     d4=-35.0
 
 
+    ##########################################
+    ######### Solve Some Cubics ##############
+    ##########################################
 
+    # Initial 4 solutions from the benchmark
     SolveCubic(a=a1, b=b1, c=c1, d=d1)
     SolveCubic(a=a2, b=b2, c=c2, d=d2)
     SolveCubic(a=a3, b=b3, c=c3, d=d3)
     SolveCubic(a=a4, b=b4, c=c4, d=d4)
 
-#   double  a1 = 1.0, b1 = -10.5, c1 = 32.0, d1 = -30.0;
-#   double  a2 = 1.0, b2 = -4.5, c2 = 17.0, d2 = -30.0;
-#   double  a3 = 1.0, b3 = -3.5, c3 = 22.0, d3 = -31.0;
-#   double  a4 = 1.0, b4 = -13.7, c4 = 1.0, d4 = -35.0;
+    # Now, solve lots of random equations from the benchmark
+    # Have 4 nested iterations to test lots of combinations
+    # Note that the benchmark overwrites the original values and we maintain this behaviour here
+    for a1 in range(1,10,1):
 
-    print('********* CUBIC FUNCTIONS ***********')
+        for b1 in range(10,0,-1):
+
+            # Because the python 'range' iteration syntax does not support floats, we scale by x10 and then scale back
+            # Seems to be the best way to get 'apples-to-apples' with the c benchmark
+            c1_range_start = 5
+            c1_range_end = 15
+            c1_range_step = 0.5
+            c1_sf = 10 # Scaling Factors to deal with scaling of floats
+            for c1 in range( int(c1_range_start*c1_sf), int(c1_range_end*c1_sf), int(c1_range_step*c1_sf) ):
+                # Scale back to float
+                c1 = c1/c1_sf
+
+                for d1 in range(-1,-11,-1):
+
+                    # Have iterated through all 4 nested loop for 4 different sets of values
+                    # Now Run cubic solver for all our values
+                    SolveCubic(a1, b1, c1, d1)
+                    print(f"a1: {a1} b1: {b1} c1: {c1} d1: {d1}")
 
 
 # Helper function for Solving Cubics, based on function of same name from 'cubic.c' from benchmark
@@ -59,6 +80,7 @@ def SolveCubic(a, b, c, d):
     R = (2.0*a1*a1*a1 - 9.0*a1*a2 + 27.0*a3)/54.0;
     R2_Q3 = R*R - Q*Q*Q
 
+    # Check for number of solutions
     if R2_Q3 <= 0:
         solutions = 3
         theta = math.acos(R/math.sqrt(Q*Q*Q))
