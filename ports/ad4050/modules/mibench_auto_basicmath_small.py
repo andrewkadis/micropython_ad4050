@@ -2,6 +2,9 @@
 import math
 
 
+
+
+
 # Python version of MiBench, Automotive Set, Basic Maths, Small Benchmark
 # Manually converted by hand by A. Kadis, 28th Jan 2018
 def run_basicmath_small():
@@ -60,7 +63,11 @@ def run_basicmath_small():
                     # Have iterated through all 4 nested loop for 4 different sets of values
                     # Now Run cubic solver for all our values
                     SolveCubic(a1, b1, c1, d1)
-                    print(f"a1: {a1} b1: {b1} c1: {c1} d1: {d1}")
+                    # print(f"a1: {a1} b1: {b1} c1: {c1} d1: {d1}")
+
+
+
+
 
 
 # Helper function for Solving Cubics, based on function of same name from 'cubic.c' from benchmark
@@ -68,9 +75,9 @@ def SolveCubic(a, b, c, d):
 
     # Variables to return
     solutions = 0
-    x0 = 0
-    x1 = 0
-    x2 = 0
+    x0 = math.nan
+    x1 = math.nan
+    x2 = math.nan
 
     # Maths equations from benchmark
     a1 = b/a
@@ -88,21 +95,19 @@ def SolveCubic(a, b, c, d):
         x1 = -2.0*math.sqrt(Q)*math.cos((theta+2.0*math.pi)/3.0) - a1/3.0
         x2 = -2.0*math.sqrt(Q)*math.cos((theta+4.0*math.pi)/3.0) - a1/3.0
 
-        print('3 Solutions')
-
     else:
+
         solutions = 1
+        x0 = math.pow(math.sqrt(R2_Q3)+math.fabs(R), 1/3.0);
+        x0 += Q/x0;
+        if R < 0.0:
+            x0 *= 1
+        else:
+            x0 *= -1
+        x0 -= a1/3.0;
 
-        print('1 Solutions')
-        
-            # *solutions = 1;
-            # x[0] = pow(sqrt(R2_Q3)+fabs(R), 1/3.0);
-            # x[0] += Q/x[0];
-            # x[0] *= (R < 0.0) ? 1 : -1;
-            # x[0] -= a1/3.0;
-
-
-
+    # Print        
+    print(f"NumSolutions: {solutions} x0: {x0} x1: {x1} x2: {x2}")
 
 
 
