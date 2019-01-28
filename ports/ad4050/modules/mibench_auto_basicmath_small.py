@@ -41,29 +41,44 @@ def run_basicmath_small():
     SolveCubic(a=a3, b=b3, c=c3, d=d3)
     SolveCubic(a=a4, b=b4, c=c4, d=d4)
 
-    # Now, solve lots of random equations from the benchmark
-    # Have 4 nested iterations to test lots of combinations
-    # Note that the benchmark overwrites the original values and we maintain this behaviour here
-    for a1 in range(1,10,1):
+    # # Now, solve lots of random equations from the benchmark
+    # # Have 4 nested iterations to test lots of combinations
+    # # Note that the benchmark overwrites the original values and we maintain this behaviour here
+    # for a1 in range(1,10,1):
 
-        for b1 in range(10,0,-1):
+    #     for b1 in range(10,0,-1):
 
-            # Because the python 'range' iteration syntax does not support floats, we scale by x10 and then scale back
-            # Seems to be the best way to get 'apples-to-apples' with the c benchmark
-            c1_range_start = 5
-            c1_range_end = 15
-            c1_range_step = 0.5
-            c1_sf = 10 # Scaling Factors to deal with scaling of floats
-            for c1 in range( int(c1_range_start*c1_sf), int(c1_range_end*c1_sf), int(c1_range_step*c1_sf) ):
-                # Scale back to float
-                c1 = c1/c1_sf
+    #         # Because the python 'range' iteration syntax does not support floats, we scale by x10 and then scale back
+    #         # Seems to be the best way to get 'apples-to-apples' with the c benchmark
+    #         c1_range_start = 5
+    #         c1_range_end = 15
+    #         c1_range_step = 0.5
+    #         c1_sf = 10 # Scaling Factors to deal with scaling of floats
+    #         for c1 in range( int(c1_range_start*c1_sf), int(c1_range_end*c1_sf), int(c1_range_step*c1_sf) ):
+    #             # Scale back to float
+    #             c1 = c1/c1_sf
 
-                for d1 in range(-1,-11,-1):
+    #             for d1 in range(-1,-11,-1):
 
-                    # Have iterated through all 4 nested loop for 4 different sets of values
-                    # Now Run cubic solver for all our values
-                    SolveCubic(a1, b1, c1, d1)
-                    # print(f"a1: {a1} b1: {b1} c1: {c1} d1: {d1}")
+    #                 # Have iterated through all 4 nested loop for 4 different sets of values
+    #                 # Now Run cubic solver for all our values
+    #                 SolveCubic(a1, b1, c1, d1)
+    #                 # print(f"a1: {a1} b1: {b1} c1: {c1} d1: {d1}")
+
+    ##########################################
+    ####### Integer Square Roots #############
+    ##########################################
+    # usqrt(x=0xFFFFFFFF)
+    usqrt(x=144)
+
+    t1 = 0x0000FF00
+    t2 = t1 <<16
+    print(f"t2: {t2:x}")
+
+
+    t1 = 0x00FF0000
+    t2 = (t1 <<16) & 0xFFFFFFFF
+    print(f"t2: {t2:x}")
 
 
 
@@ -108,6 +123,33 @@ def SolveCubic(a, b, c, d):
 
     # Print        
     print(f"NumSolutions: {solutions} x0: {x0} x1: {x1} x2: {x2}")
+
+
+
+
+
+
+# Helper function for square roots of unsigned integers, based on function of same name from 'isqrt.c' from benchmark
+# Please see this file for respective notes on the algorithm employed
+def usqrt(x):
+
+    BITSPERLONG = 32
+    a = 0 # accumulator
+    r = 0 # remainder
+    e = 0 # trial product
+
+    for i in range(0,BITSPERLONG,1):
+
+        top2bits = ( (x & (3<<(BITSPERLONG-2))) >> (BITSPERLONG-2) )
+        r = ((r<<2)) + top2bits
+        x = (x<<2)
+        a = (a<<1)
+        e = ((a<<1)) + 1
+        if r>=e:
+            r = r-e
+            a = a+1
+
+    print(f"accumulator: {a} remainder: {r} trial product: {e}")
 
 
 
