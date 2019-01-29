@@ -39,6 +39,8 @@ def run_basicmath_small():
     SolveCubic(a=a3, b=b3, c=c3, d=d3)
     SolveCubic(a=a4, b=b4, c=c4, d=d4)
 
+    print("Here\n\r")
+
     # Now, solve lots of random equations from the benchmark
     # Have 4 nested iterations to test lots of combinations
     # Note that the benchmark overwrites the original values and we maintain this behaviour here
@@ -89,6 +91,8 @@ def run_basicmath_small():
 
 # Helper function for Solving Cubics, based on function of same name from 'cubic.c' from benchmark
 def SolveCubic(a, b, c, d):
+
+    print("Here\n\r")
 
     # Variables to return
     solutions = 0
@@ -169,5 +173,6 @@ def deg2rad(deg):
 
 
 # Main
+print("Benchmark Started")
 run_basicmath_small()
 print("Benchmark Complete")
