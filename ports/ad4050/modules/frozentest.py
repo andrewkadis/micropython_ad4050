@@ -92,13 +92,11 @@ def run_basicmath_small():
 # Helper function for Solving Cubics, based on function of same name from 'cubic.c' from benchmark
 def SolveCubic(a, b, c, d):
 
-    print("Here\n\r")
-
     # Variables to return
     solutions = 0
-    x0 = math.nan
-    x1 = math.nan
-    x2 = math.nan
+    x0 = 0
+    x1 = 0
+    x2 = 0
 
     # Maths equations from benchmark
     a1 = b/a
