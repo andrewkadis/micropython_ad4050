@@ -1154,12 +1154,12 @@ mod: $(MOD_OBJS)
 
 # Generating the Frozen Modules requires extra pre-processing of quadstrings
 $(MOD_BIN)/_frozen_mpy.o: modules/frozentest.py
-	@echo 'Generating qstrings...'
-	cat ../../py/qstrdefs.h qstrdefsport.h ../../mpy-cross/build/genhdr/qstrdefs.collected.h | sed 's/^Q(.*)/"&"/' | arm-none-eabi-gcc -E -I. -I../.. -Ibuild -Wall -Werror -std=c99 -nostdlib -mthumb -mtune=cortex-m4 -mabi=aapcs-linux -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -fsingle-precision-constant -Wdouble-promotion  -Os -DNDEBUG -fdata-sections -ffunction-sections - | sed 's/^"\(Q(.*)\)"/\1/' > bin/genhdr/qstrdefs.preprocessed.h
-	python ../../py/makeqstrdata.py bin/genhdr/qstrdefs.preprocessed.h > bin/genhdr/qstrdefs.generated.h
+	# @echo 'Generating qstrings...'
+	# cat ../../py/qstrdefs.h qstrdefsport.h ../../mpy-cross/build/genhdr/qstrdefs.collected.h | sed 's/^Q(.*)/"&"/' | arm-none-eabi-gcc -E -I. -I../.. -Ibuild -Wall -Werror -std=c99 -nostdlib -mthumb -mtune=cortex-m4 -mabi=aapcs-linux -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=hard -fsingle-precision-constant -Wdouble-promotion  -Os -DNDEBUG -fdata-sections -ffunction-sections - | sed 's/^"\(Q(.*)\)"/\1/' > bin/genhdr/qstrdefs.preprocessed.h
+	# python ../../py/makeqstrdata.py bin/genhdr/qstrdefs.preprocessed.h > bin/genhdr/qstrdefs.generated.h
 	@echo 'Generating Python Bytecode'
 	../../mpy-cross/mpy-cross -X heapsize=80000 modules/frozentest.py -o $(MOD_BIN)/frozentest.mpy
-	../../tools/mpy-tool.py -f -q bin/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $(MOD_BIN)/frozentest.mpy > $(MOD_BIN)/_frozen_mpy.c
+	../../tools/mpy-tool.py -f -q build/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $(MOD_BIN)/frozentest.mpy > $(MOD_BIN)/_frozen_mpy.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: ARM GCC Compiler'
 	$(CC) $(CFLAGS) -o  "$@" $(MOD_BIN)/_frozen_mpy.c

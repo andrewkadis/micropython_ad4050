@@ -29,7 +29,6 @@ def run_basicmath_small():
     # Large number to find sqrt to solve - from benchmark    
     l = 0x3fed0169
 
-
     ##########################################
     ######### Solve Some Cubics ##############
     ##########################################
