@@ -14,7 +14,8 @@
 		"files.associations": {
 			"sstream": "c",
 			"port.h": "c",
-			"adi_drivers_general.h": "c"
+			"adi_drivers_general.h": "c",
+			"qstrdefs.generated.h": "c"
 		}
 	}
 }
