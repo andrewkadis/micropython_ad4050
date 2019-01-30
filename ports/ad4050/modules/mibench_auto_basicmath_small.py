@@ -1,10 +1,6 @@
 
 import math
 
-
-
-
-
 # Python version of MiBench, Automotive Set, Basic Maths, Small Benchmark
 # Manually converted by hand by A. Kadis, 28th Jan 2018
 def run_basicmath_small():
@@ -33,7 +29,6 @@ def run_basicmath_small():
     # Large number to find sqrt to solve - from benchmark    
     l = 0x3fed0169
 
-
     ##########################################
     ######### Solve Some Cubics ##############
     ##########################################
@@ -44,30 +39,33 @@ def run_basicmath_small():
     SolveCubic(a=a3, b=b3, c=c3, d=d3)
     SolveCubic(a=a4, b=b4, c=c4, d=d4)
 
+    print("HereA\n\r")
+
     # Now, solve lots of random equations from the benchmark
     # Have 4 nested iterations to test lots of combinations
     # Note that the benchmark overwrites the original values and we maintain this behaviour here
-    for a1 in range(1,10,1):
+    for a1 in range(1,2,1):
 
-        for b1 in range(10,0,-1):
+        for b1 in range(10,0,-9):
 
             # Because the python 'range' iteration syntax does not support floats, we scale by x10 and then scale back
             # Seems to be the best way to get 'apples-to-apples' with the c benchmark
             c1_range_start = 5
-            c1_range_end = 15
+            c1_range_end = 6
             c1_range_step = 0.5
             c1_sf = 10 # Scaling Factors to deal with scaling of floats
             for c1 in range( int(c1_range_start*c1_sf), int(c1_range_end*c1_sf), int(c1_range_step*c1_sf) ):
                 # Scale back to float
                 c1 = c1/c1_sf
 
-                for d1 in range(-1,-11,-1):
+                for d1 in range(-1,-2,-1):
 
                     # Have iterated through all 4 nested loop for 4 different sets of values
                     # Now Run cubic solver for all our values
                     SolveCubic(a1, b1, c1, d1)
                     # print(f"a1: {a1} b1: {b1} c1: {c1} d1: {d1}")
 
+    print("End\n\r")
     ##########################################
     ####### Integer Square Roots #############
     ##########################################
@@ -97,9 +95,9 @@ def SolveCubic(a, b, c, d):
 
     # Variables to return
     solutions = 0
-    x0 = math.nan
-    x1 = math.nan
-    x2 = math.nan
+    x0 = 0
+    x1 = 0
+    x2 = 0
 
     # Maths equations from benchmark
     a1 = b/a
@@ -174,5 +172,6 @@ def deg2rad(deg):
 
 
 # Main
+print("Benchmark Started")
 run_basicmath_small()
 print("Benchmark Complete")
