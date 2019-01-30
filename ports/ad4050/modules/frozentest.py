@@ -34,4 +34,4 @@ alist = [54,26,93,17,77,31,44,55,20,65]
 bubbleSort(alist)
 
 # Print the results at the end - this mainly for debug, make sure its disabled when testing
-print(alist)
+# print(alist)
