@@ -134,7 +134,8 @@ typedef struct {
 static PinMap MSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_10};  /*   Red LED on GPIO42 (DS4) */
 static PinMap LSB = {ADI_GPIO_PORT2, ADI_GPIO_PIN_2};   /* Green LED on GPIO34 (DS3) */
 
-
+// Bool to control whether or not we are GPIO benchmarking execution time
+static bool gpio_benchmarking_is_on = true;
 
 
 
@@ -163,6 +164,24 @@ int main(void)
     // Command to Init Micropython
     mp_init();
 
+
+
+    // Wiggle GPIO if we are benchmarking for start, measure from end of pulse
+    if(gpio_benchmarking_is_on){
+        // Want a nice pulse to trigger scope from for benchmarking
+        // GPIO High, wait ~500ms, GPIO Low
+        // This will have the effect of dimming the LEDs for ~500ms
+        adi_gpio_SetHigh(MSB.Port, MSB.Pins);
+        adi_gpio_SetHigh(LSB.Port, LSB.Pins);
+        // Wait ~500ms
+        for (volatile uint32_t i = 0; i < 1000000; i++); // Sorresponds to ~500ms (~497m)
+        // Turn back
+        adi_gpio_SetLow(MSB.Port, MSB.Pins);
+        adi_gpio_SetLow(LSB.Port, LSB.Pins);
+    }
+
+
+
     // Micropython event loop is taken directly from Micropython
     // MACRO structure is a bit convoluted but hesitatnt to modify it
     #if MICROPY_ENABLE_COMPILER
@@ -180,7 +199,25 @@ int main(void)
     #else
     pyexec_frozen_module("modules/frozentest.py");
     #endif
+
+
+
+     // Wiggle GPIO if we are benchmarking for end, measure from start of pulse
+    if(gpio_benchmarking_is_on){
+        // Want a nice pulse to trigger scope from for benchmarking
+        // GPIO High, wait ~500ms, GPIO Low
+        // This will have the effect of dimming the LEDs for ~500ms
+        adi_gpio_SetHigh(MSB.Port, MSB.Pins);
+        adi_gpio_SetHigh(LSB.Port, LSB.Pins);
+        // Wait ~500ms
+        for (volatile uint32_t i = 0; i < 1000000; i++); // Sorresponds to ~500ms (~497m)
+        // Turn back
+        adi_gpio_SetLow(MSB.Port, MSB.Pins);
+        adi_gpio_SetLow(LSB.Port, LSB.Pins);
+    }
     
+
+
     // Command to stop Micropython, typically called after exited with CTRL+D
     mp_deinit();
     
